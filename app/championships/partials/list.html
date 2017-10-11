@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Business Frontpage - Start Bootstrap Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/business-frontpage.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Inicio</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a ui-sref="campeonatos">Campeonatos</a>
+                    </li>
+                    <li>
+                        <a ui-sref="competidores">Competidores</a>
+                    </li>
+                    <li>
+                        <a ui-sref="clubes">Clubs</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="./backend/logout.php">Cerrar sesión</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Image Background Page Header -->
+    <!-- Note: The background image is set within the business-casual.css file. -->
+    <header class="business-header championship-background">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="tagline">Campeonatos</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <hr>
+        <div class="row">
+            <div class="col-sm-8 text-right">
+                <button class="btn btn-info margin-bottom-15"
+                ng-click="campCtrl.addNewChampionship()">
+                <span class="glyphicon glyphicon-plus"></span>
+                Insertar nuevo campeonato</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <th>Nombre campeonato</th>
+                        <th>Fecha</th>
+                        <th>Lugar</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="campeonato in campCtrl.championshipList track by $index" 
+                            ng-click="campCtrl.selectChampionship(campeonato, $index)"
+                            ng-class="{'selected': campeonato.selected}">
+                            <td>{{ campeonato.name }}</td>
+                            <td>{{ campeonato.date }}</td>
+                            <td>{{ campeonato.lugar }}</td>
+                            <td><a class="btn btn-danger"
+                               ng-click="campCtrl.deleteChampionship(campeonato.id)">Eliminar</a>
+                            </td>
+                            <td><a class="btn btn-info"
+                                
+                               ng-click="campCtrl.cerrarChampionship(campeonato)">Cerrar campeonato</a></td>
+                            <td><a class="btn btn-info"
+                               ng-click="" ui-sref="inscribir({id: campeonato.id, championshipName: campeonato.name })">Inscribir participantes</a></td>
+                        </tr>
+                                              
+
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="col-sm-4" ng-if="campCtrl.showDetail">
+                <!-- <div ng-style="compCtrl.detailHeigth"> -->
+                <!-- <div class="detail-competitor"> -->
+                <div class="detail-c">
+                    <div class="thumbnail">
+                        <div>
+                            <img src="https://pbs.twimg.com/profile_images/660946436801101824/niM7azZS.jpg" alt="">
+                            <span class="edit-inline edit-picture"></span>
+                            <!-- <img src="./css/img/edit-inline.png" alt=""> -->
+
+                        </div>
+                        <div class="caption">
+                            <!-- EDIT MODE -->
+                        <h3 ng-if="campCtrl.selectedChampionship.id">
+                            {{campCtrl.selectedChampionship.name}} 
+                        </h3>
+                        <!-- ADD MODE -->
+                        <h3 ng-if="!campCtrl.selectedChampionship.id">
+                            Nuevo campeonato
+                        </h3>
+                            <p>
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <kbd>Nombre de campeonato:</kbd>
+                                    <input type="text"
+                                           class="form-control edit-inline"
+                                           ng-model="campCtrl.selectedChampionship.name">
+                                </div>
+                            </div>
+                        </p>
+                        <p>
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <kbd>Fecha:</kbd>
+                                    <input type="text"
+                                           class="form-control edit-inline"
+                                           ng-model="campCtrl.selectedChampionship.date">
+                                </div>
+                            </div>
+                        </p>
+                        <p>
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <kbd>Lugar:</kbd>
+                                    <input type="text"
+                                           class="form-control edit-inline"
+                                           ng-model="campCtrl.selectedChampionship.lugar">
+                                </div>
+                            </div>
+                        </p>
+                        <p>
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <kbd>Abierto:</kbd>
+                                    <input type="text"
+                                           class="form-control edit-inline"
+                                           ng-model="campCtrl.selectedChampionship.abierto">
+                                </div>
+                            </div>
+                        </p>
+                        <p>
+                            <a class="btn btn-primary"
+                                ng-if="campCtrl.selectedChampionship.id"
+                               ng-click="campCtrl.updateChampionship()">Actualizar</a>
+                            <a class="btn btn-primary"
+                               ng-if="!campCtrl.selectedChampionship.id"
+                               ng-click="campCtrl.addChampionship()">Añadir</a>
+                            <a class="btn btn-default"
+                               ng-click="campCtrl.cancelUpdate()">Cancelar</a>
+                        </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+        <div class="row">
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <!-- // <script src="../js/jquery.js"></script> -->
+
+    <!-- Bootstrap Core JavaScript -->
+    <!-- // <script src="../js/bootstrap.min.js"></script> -->
+
+<script type="text/javascript">
+
+$(document).ready(function () {  
+    var topElement = $('.detail-c').offset().top;
+    $(window).scroll(function(){
+        var topWindow = $(window).scrollTop();
+        console.log('topElement ' + topElement)
+        console.log('topWindow ' + topWindow)
+        if ( topWindow > topElement ) {
+            var scroll = topWindow - topElement;
+            $(".detail-c").stop().animate({"marginTop": scroll + "px", "marginLeft":($(window).scrollLeft()) + "px"}, "slow" );
+            
+        }
+    });   
+})
+
+
+
+
+
+</script>
+
+
+</body>
+
+</html>

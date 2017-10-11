@@ -1,0 +1,114 @@
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top"
+     role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button"
+                    class="navbar-toggle"
+                    data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand"
+               href="#">Inicio</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse"
+             id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a ui-sref="campeonatos">Campeonatos</a>
+                </li>
+                <li>
+                    <a ui-sref="competidores">Competidores</a>
+                </li>
+                <li>
+                    <a ui-sref="clubes">Clubs</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="./backend/logout.php">Cerrar sesión</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<!-- Image Background Page Header -->
+<!-- Note: The background image is set within the business-casual.css file. -->
+<header class="business-header competitor-background">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="tagline">Inscribir Competidores</h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Page Content -->
+<div class="container">
+
+    <hr>
+    <h1>Añadir competidores a {{inscripCtrl.championshipName}}</h1>
+
+    <div class="row">
+        <div class="col-sm-12">
+
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>DNI</th>
+                    <th>Sexo</th>
+                    <th>Fecha Nacimineto</th>
+                    <th>Nº Licencia</th>
+                    <th>Inscribir</th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="competitor in inscripCtrl.inscripscionesList track by $index"
+
+                        ng-class="{'selected': competitor.selected}">
+                        <td>{{ competitor.name }}</td>
+                        <td>{{ competitor.last_name }}</td>
+                        <td>{{ competitor.dni }}</td>
+                        <td>{{ competitor.gender }}</td>
+                        <td>{{ competitor.birth_date }}</td>
+                        <td>{{ competitor.license_number }}</td>
+                        <td>
+                            <input type="checkbox" ng-model="competitor.selected">
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+        
+    </div>
+        <div class="row">
+        <div class="col-sm-12 text-right">
+            <button class="btn btn-info margin-bottom-15"
+                    ng-click="inscripCtrl.addToChampionship()">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Inscribir competidores</button>
+        </div>
+    </div>
+    <!-- /.row -->
+    <hr>
+    <div class="row">
+
+    </div>
+    <!-- /.row -->
+    <hr>
+</div>
+<!-- /.container -->
+

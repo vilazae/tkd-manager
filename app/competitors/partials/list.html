@@ -1,0 +1,279 @@
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top"
+     role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button"
+                    class="navbar-toggle"
+                    data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand"
+               href="#">Inicio</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse"
+             id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a ui-sref="campeonatos">Campeonatos</a>
+                </li>
+                <li>
+                    <a ui-sref="competidores">Competidores</a>
+                </li>
+                <li>
+                    <a ui-sref="clubes">Clubs</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="./backend/logout.php">Cerrar sesión</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<!-- Image Background Page Header -->
+<!-- Note: The background image is set within the business-casual.css file. -->
+<header class="business-header competitor-background">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="tagline">Competidores</h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Page Content -->
+<div class="container">
+
+    <hr>
+    <div class="row">
+        <div class="col-sm-8 text-right">
+            <button class="btn btn-info margin-bottom-15"
+                    ng-click="compCtrl.addNewCompetitor()">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Insertar nuevo competidor</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>DNI</th>
+                    <th>Sexo</th>
+                    <th>Fecha Nacimineto</th>
+                    <th>Nº Licencia</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="competitor in compCtrl.competitorsList track by $index"
+                        ng-click="compCtrl.selectCompetitor(competitor, $index)"
+                        ng-class="{'selected': competitor.selected}">
+                        <td>{{ competitor.name }}</td>
+                        <td>{{ competitor.last_name }}</td>
+                        <td>{{ competitor.dni }}</td>
+                        <td>{{ competitor.gender }}</td>
+                        <td>{{ competitor.birth_date }}</td>
+                        <td>{{ competitor.license_number }}</td>
+                        <td>
+                            <a class="btn btn-danger"
+                               ng-click="compCtrl.deleteCompetitor(competitor.id)">Eliminar</a>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+        <div class="col-sm-4"
+             ng-if="compCtrl.showDetail">
+            <div class="detail-c">
+                <div class="thumbnail">
+                    <div>
+                        <img src="https://pbs.twimg.com/profile_images/660946436801101824/niM7azZS.jpg"
+                             alt="">
+                        <span class="edit-inline edit-picture"></span>
+                        <!-- <img src="./css/img/edit-inline.png" alt=""> -->
+
+                    </div>
+                    <div class="caption">
+                        <!-- EDIT MODE -->
+                        <h3 ng-if="compCtrl.selectedCompetitor.id">
+                            {{compCtrl.selectedCompetitor.public_name}} {{compCtrl.selectedCompetitor.public_last_name}}
+                        </h3>
+                        <!-- ADD MODE -->
+                        <h3 ng-if="!compCtrl.selectedCompetitor.id">
+                            Nuevo competidor
+                        </h3>
+                        <!-- <p>
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <kbd>DNI:</kbd>
+                                    <span ng-if="!compCtrl.edit">{{compCtrl.selectedCompetitor.dni}}</span>
+                                    <input ng-if="compCtrl.edit"
+                                            type="text"
+                                            class="form-control edit-inline"
+                                            ng-model="compCtrl.selectedCompetitor.dni"
+                                            ng-keypress="compCtrl.aceptEdition($event);">
+                                    <span ng-if="!compCtrl.edit"
+                                            ng-click="compCtrl.enterEdit();"
+                                            class="edit-inline"></span>
+                                    <span ng-if="compCtrl.edit"
+                                            ng-click="compCtrl.enterEdit();"
+                                            class="accept-inline"></span>
+                                    <span ng-if="compCtrl.edit"
+                                            ng-click="compCtrl.enterEdit();"
+                                            class="cancel-inline"></span>
+
+                                </div>
+                            </div>
+                        </p> -->
+                        <!-- DNI -->
+                        <p>
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <kbd>DNI:</kbd>
+                                    <input type="text"
+                                           class="form-control edit-inline"
+                                           ng-model="compCtrl.selectedCompetitor.dni">
+                                </div>
+                            </div>
+                        </p>
+                        <p>
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <kbd>Nombre:</kbd>
+                                    <input type="text"
+                                           class="form-control edit-inline"
+                                           ng-model="compCtrl.selectedCompetitor.name">
+                                </div>
+                            </div>
+                        </p>
+                        <p>
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <kbd>Apellidos:</kbd>
+                                    <input type="text"
+                                           class="form-control edit-inline"
+                                           ng-model="compCtrl.selectedCompetitor.last_name">
+                                </div>
+                            </div>
+                        </p>
+                        <p>
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <kbd>Sexo:</kbd>
+                                    <input type="text"
+                                           class="form-control edit-inline"
+                                           ng-model="compCtrl.selectedCompetitor.gender">
+                                </div>
+                            </div>
+                        </p>
+                        <p>
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <kbd>Fecha nacimiento:</kbd>
+                                    <input type="text"
+                                           class="form-control edit-inline"
+                                           ng-model="compCtrl.selectedCompetitor.birth_date">
+                                </div>
+                            </div>
+                        </p>
+                        <p>
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <kbd>Nº Licencia:</kbd>
+                                    <input type="text"
+                                           class="form-control edit-inline"
+                                           ng-model="compCtrl.selectedCompetitor.license_number">
+                                </div>
+                            </div>
+                        </p>
+                        <p>
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <kbd>Fecha expiración:</kbd>
+                                    <input type="text"
+                                           class="form-control edit-inline"
+                                           ng-model="compCtrl.selectedCompetitor.license_expiration_date">
+                                </div>
+                            </div>
+                        </p>
+                        <p>
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <kbd>Cinturón:</kbd>
+                                    <input type="text"
+                                           class="form-control edit-inline"
+                                           ng-model="compCtrl.selectedCompetitor.belt">
+                                </div>
+                            </div>
+                        </p>
+                        <p>
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <kbd>Club:</kbd>
+                                    <input type="text"
+                                           class="form-control edit-inline"
+                                           ng-model="compCtrl.selectedCompetitor.club_id">
+                                </div>
+                            </div>
+                        </p>
+                        <p>
+                            <a class="btn btn-primary"
+                               ng-if="compCtrl.selectedCompetitor.id"
+                               ng-click="compCtrl.updateCompetitor()">Actualizar</a>
+                            <a class="btn btn-primary"
+                               ng-if="!compCtrl.selectedCompetitor.id"
+                               ng-click="compCtrl.addCompetitor()">Añadir</a>
+                            <a class="btn btn-default"
+                               ng-click="compCtrl.cancelUpdate()">Cancelar</a>
+                        </p>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+    <hr>
+    <div class="row">
+
+    </div>
+    <!-- /.row -->
+    <hr>
+</div>
+<!-- /.container -->
+
+<script type="text/javascript">
+    // $(document).ready(function() {
+    //     var topElement = $('.detail-c').offset().top;
+    //     $(window).scroll(function() {
+    //         var topWindow = $(window).scrollTop();
+    //         console.log('topElement ' + topElement)
+    //         console.log('topWindow ' + topWindow)
+    //         if (topWindow > topElement) {
+    //             var scroll = topWindow - topElement;
+    //             $(".detail-c").stop().animate({
+    //                 "marginTop": scroll + "px",
+    //                 "marginLeft": ($(window).scrollLeft()) + "px"
+    //             }, "slow");
+    //         }
+    //     });
+    // })
+</script>
