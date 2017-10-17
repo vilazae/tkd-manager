@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Business Frontpage - Start Bootstrap Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/business-frontpage.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Start Bootstrap</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    <li>
+                        <a href="#">Services</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Image Background Page Header -->
+    <!-- Note: The background image is set within the business-casual.css file. -->
+    <header class="business-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="tagline">Competidores</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <hr>
+
+        <div class="row">
+            <div class="col-sm-8">
+
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>DNI</th>
+                        <th>Sexo</th>
+                        <th>Fecha Nacimineto</th>
+                        <th>Nº Licencia</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="competitor in compCtrl.competitorsList track by $index" 
+                            ng-click="compCtrl.selectCompetitor(competitor, $index)"
+                            ng-class="{'selected': competitor.selected}">
+                            <td>{{ competitor.name }}</td>
+                            <td>{{ competitor.surname }}</td>
+                            <td>{{ competitor.dni }}</td>
+                            <td>{{ competitor.gender }}</td>
+                            <td>{{ competitor.birthday_date }}</td>
+                            <td>{{ competitor.liscense }}</td>
+                        </tr>
+                                              
+
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="col-sm-4" ng-if="compCtrl.showDetail">
+                <!-- <div ng-style="compCtrl.detailHeigth"> -->
+                <!-- <div class="detail-competitor"> -->
+                <div class="detail-c">
+                    <div class="thumbnail">
+                        <div>
+                            <img src="https://pbs.twimg.com/profile_images/660946436801101824/niM7azZS.jpg" alt="">
+                            <span class="edit-inline edit-picture"></span>
+                            <!-- <img src="./css/img/edit-inline.png" alt=""> -->
+
+                        </div>
+                        <div class="caption">
+                            <h3>{{compCtrl.selectedCompetitor.name}} {{compCtrl.selectedCompetitor.surname}}</h3>
+                            <p>
+                                <div class="form-inline">
+                                    <div class="form-group">
+
+                                        <kbd>DNI:</kbd>
+
+                                        <span ng-if="!compCtrl.edit">{{compCtrl.selectedCompetitor.date}}</span>
+
+                                        <input ng-if="compCtrl.edit" 
+                                            type="date" 
+                                            class="form-control edit-inline"
+                                            ng-model="compCtrl.selectedCompetitor.date"
+                                            ng-keypress="compCtrl.aceptEdition($event);">
+
+                                        <span ng-click="compCtrl.enterEdit();" class="edit-inline"></span>
+                                    </div>                                
+                                </div>
+                            </p>
+
+
+
+
+
+                            <p><kbd>Género:</kbd>{{compCtrl.selectedCompetitor.gender}}</p>
+                            <p><kbd>Nacimiento:</kbd>{{compCtrl.selectedCompetitor.birthday_date}}</p>
+                            <p><kbd>Licencia:</kbd>{{compCtrl.selectedCompetitor.liscense}}</p>
+                            <p>
+                                <a class="btn btn-primary">Save</a> <a class="btn btn-default">Cancelg</a>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+        <div class="row">
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <!-- // <script src="../js/jquery.js"></script> -->
+
+    <!-- Bootstrap Core JavaScript -->
+    <!-- // <script src="../js/bootstrap.min.js"></script> -->
+
+<script type="text/javascript">
+
+$(document).ready(function () {  
+    var topElement = $('.detail-c').offset().top;
+    $(window).scroll(function(){
+        var topWindow = $(window).scrollTop();
+        console.log('topElement ' + topElement)
+        console.log('topWindow ' + topWindow)
+        if ( topWindow > topElement ) {
+            var scroll = topWindow - topElement;
+            $(".detail-c").stop().animate({"marginTop": scroll + "px", "marginLeft":($(window).scrollLeft()) + "px"}, "slow" );
+            
+        }
+    });   
+})
+
+
+
+
+
+</script>
+
+
+</body>
+
+</html>
