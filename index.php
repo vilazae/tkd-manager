@@ -24,7 +24,7 @@ define('DB_COLLATE', '');
 
 print_r($_POST);
 print_r('<br>');
-if (isset($_POST['usuario']) && $_POST[usuario] != '') {
+if (isset($_POST['usuario']) && $_POST['usuario'] != '') {
 	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 	if ($mysqli->connect_errno) {
 		echo "Falló la conexión a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
@@ -74,7 +74,7 @@ $query = 'SELECT tkd_usuarios.nombre as persona, tkd_usuarios.apellidos, tkd_clu
   <body>
     <div>
       <hr>
-      <h1>Login Please!</h1>
+      <h1>Login Vitoriiiiin!</h1>
 	  <form action="./index.php" method="post">
 		<div>
 			<label>Usuario:</label>
