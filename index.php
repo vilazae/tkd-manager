@@ -1,36 +1,26 @@
-<?php
-
-/*
-
-// Realizar una consulta MySQL
-$query = 'SELECT tkd_usuarios.nombre as persona, tkd_usuarios.apellidos, tkd_clubes.nombre FROM tkd_usuarios JOIN tkd_clubes ON tkd_usuarios.club_id = tkd_clubes.id';
-*/
-
-
-?>
 <!doctype html>
 <html>
-  <head>
-	<meta charset="UTF-8">
+	<head>
+		<meta charset="UTF-8">
+		<link href="css/login.css" rel="stylesheet">
+	</head>
+	<body class="bg-tkd">
 
-  </head>
-  <body>
-    <div>
-      <hr>
-      <h1>Login Vitoriiiiin!</h1>
-	  <form action="./backend/login.php" method="post">
-		<div>
-			<label>Usuario:</label>
-			<input type='text' name='usuario' placeholder="direccion@correo.com">
+		<div class="modal fade modal-tkd" id="login-modal" >
+			<div class="modal-dialog">
+				<div class="loginmodal-container">
+					<h1>Acceso a TKD Manager</h1><br>
+					<form action="./backend/login.php" method="post">
+						<input type="text" name="usuario" placeholder="Usuario">
+						<input type="password" name="password" placeholder="Contraseña">
+						<input type="submit" name="login" class="login loginmodal-submit" value="Acceder">
+					</form>
+
+					<div class="login-help">
+						<a href="#">Register</a> - <a href="#">Forgot Password</a>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div>
-			<label>Contraseña:</label>
-			<input type='password' name='password'>
-		</div>
-		<div>
-			<input type='submit' text='Entrar'>
-		</div>
-	  </form>
-    </div>
-  </body>
+	</body>
 </html>
