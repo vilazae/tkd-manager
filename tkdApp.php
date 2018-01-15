@@ -1,5 +1,11 @@
 <?php
 session_start();
+if(isset($_SESSION['session_user'])){
+	echo($_SESSION['session_user']->name);
+}
+else{
+	header("Location: http://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']);
+}
 ?>
 
 
@@ -22,6 +28,7 @@ session_start();
 	</script>
   </head>
   <body ng-app="tkdApp">
+  	<a href="logout.php"> Cerrar sesion</p>
 	<div ui-view></div>
   </body>
 </html>

@@ -2,16 +2,16 @@
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define('DB_NAME', 'u694337422_yhyby');
+define('DB_NAME', 'ddb102461');
 
 /** MySQL database username */
-define('DB_USER', 'u694337422_yzuhy');
+define('DB_USER', 'ddb102461');
 
 /** MySQL database password */
-define('DB_PASSWORD', 'aGeRarydum');
+define('DB_PASSWORD', 'VictorTaek2017');
 
 /** MySQL hostname */
-define('DB_HOST', 'mysql');
+define('DB_HOST', 'bbdd.taekwondorioja.com');
 
 /** Database Charset to use in creating database tables. */
 // define('DB_CHARSET', 'utf8_unicode_ci');
@@ -28,6 +28,7 @@ class DBConnection {
      * 
      * @return bool false on failure / mysqli MySQLi object instance on success
      */
+    
     public function connect() {    
         // Try and connect to the database
         if(!isset(self::$connection)) {
@@ -99,5 +100,10 @@ class DBConnection {
         $connection = $this -> connect();
         return "'" . $connection -> real_escape_string($value) . "'";
     }
+
+    public function close() {
+        $connection = close();
+    }
+    
 }
 ?>
