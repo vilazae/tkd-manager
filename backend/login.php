@@ -5,15 +5,6 @@ if (isset($_POST['usuario']) && $_POST['usuario'] != '') {
     $usuario = $_POST['usuario'];
     $password = $_POST['password'];
     $db = new DBConnection();
-    /*$rows = $db->select("SELECT name, last_name, email, club_id, rol_id  FROM tkd_users WHERE email = ".$usuario." AND password = ".$password);
-    if($rows > 0)
-    {
-        echo("Hay registros");
-    }
-    else
-    {
-        echo("no hay registros");
-    }*/
     $mysqli = $db->connect();
     if ($mysqli->connect_errno) {
         echo "Falló la conexión a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
@@ -29,6 +20,7 @@ if (isset($_POST['usuario']) && $_POST['usuario'] != '') {
         // fetch values 
 
         if ($sentencia->fetch()) {
+            echo("Hay registros");
             session_start();
             // echo "SID: ".SID."<br>session_id(): ".session_id()."<br>COOKIE: ".$_COOKIE["PHPSESSID"];     
             $session_user = new stdClass();
@@ -41,25 +33,19 @@ if (isset($_POST['usuario']) && $_POST['usuario'] != '') {
             $_SESSION['session_user'] = $session_user;
             $sentencia->close();
             //Insertar datos de sesión en BD
-            /*
-            $sentencia_insert = $mysqli->prepare("INSERT INTO tkd_sessions (user, token, init_date) VALUES (?, ?, NOW())");
-            $sentencia_insert->bind_param("ss", $_SESSION['session_user']->email, $_SESSION['session_user']->token);
-            if ($sentencia_insert->fetch()) {
-                $sentencia_insert->execute();                
-                $sentencia_insert->close();                
+            $result = $db -> query("INSERT INTO tkd_sessions (user, token, init_date) VALUES ('".$session_user->email."', '".$_SESSION['session_user']->token."', NOW())");
+            if(!$result)
+            {
+                echo("INSERT ABORT");                
             }
-            else {
-                echo("Hubo un error insertando datos");
-            }
-
-            echo("Todo OK");
-            //header('Location:  ../tkdApp.php');
-            
+            else{
+                echo("INSERT OK");
+            }            
+            header('Location:  ../tkdApp.php');            
+        }    
+        else{
+            echo("Login no valido");
         }
-        else {
-            echo("Error en el login");
-        }
-        $mysqli->close();*/
-    }
+        $mysqli->close();
 }
 ?>

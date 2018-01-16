@@ -28,7 +28,7 @@ else{
 	</script>
   </head>
   <body ng-app="tkdApp">
-  	<a href="logout.php"> Cerrar sesion</p>
+  	<a href="./backend/logout.php"> Cerrar sesion</p>
 	<div ui-view></div>
   </body>
 </html>

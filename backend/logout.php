@@ -1,45 +1,25 @@
 <?php
 include_once("DBConnection.php");
+session_start();
 
 //Eliminar las variables de sesión definiendo $_SESSION como un array vacío
 if(isset($_SESSION['session_user'])){
 	$db = new DBConnection();
-	$result = $db -> query("DELETE FROM tkd_sessions WHERE id = 1");
+    $token = "5a5d4278ef3d6";
+	$result = $db -> query("DELETE FROM tkd_sessions WHERE token = '".$_SESSION['session_user']->token."'");
 	if(!$result)
 	{
-		echo "Algo ha salido mal";
+		echo "DELETE ABORT";
 	}
 	else{
-		echo("Se ha ejecutado la consulta");
+		echo("DELETE OK");
 		$_SESSION=array();
 		//Destruir la sesión
 		session_destroy();
 	}
 }
-//header("Location: http://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']);
-
-    	
-
-
-    /*$mysqli = $db->connect(); 
-    if ($mysqli->connect_errno) {
-        echo "Falló la conexión a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-    }
-
-    $sentencia = $mysqli->prepare("DELETE FROM tkd_sessions WHERE id = 1");
-    //$sentencia->bind_param("s", "12314546454ad");
-    //$sentencia->execute();
-
-    // fetch values 
-
-    if ($sentencia->fetch()) {
-    	//Eliminar las variables de sesión definiendo $_SESSION como un array vacío
-    	$_SESSION=array();
-	    //Destruir la sesión
-	    session_destroy();
-	    header("Location: http://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']);
-    }
-    else {
-    	echo "Se ha producido un error";
-    }*/
+else{
+    echo "No hay sesion activa";
+}
+header('Location:  ../index.php');
 ?>
