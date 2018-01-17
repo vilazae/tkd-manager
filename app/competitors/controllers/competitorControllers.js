@@ -1,9 +1,6 @@
 tkdApp.controller('competitorController', [ 'apiService', function( apiService ) {
 console.log('ctrl saludo campeonatosController!');	
 	var me = this;
-	me.nombre = window.nombreUsuario;
-	me.saludo = 'hola men!';
-	
 
 	me.competitorsList = [];
 	

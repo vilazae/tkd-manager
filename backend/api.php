@@ -1,10 +1,12 @@
 <?php
-require 'DBConnection.class.php';
+error_reporting(E_ALL);
+
+include_once("DBConnection.php");
+
 
 session_start();
 
 $db = new DBConnection();
-
 
 if ( !isSet($_SESSION['data']) ) $_SESSION['data']=array();
  
@@ -38,24 +40,40 @@ if ( isSet( $data["action"] ) ) {
 
     //  Championships List.
     if ( $data["action"] == "list_competitors" ) {
-        $res = $db -> query('SELECT * FROM tkd_competitors;');
-        
+        $mysqli = $db->connect();
+
+        $response = $db->select("SELECT * FROM tkd_competitors;");
+
+
+
         $rows = array();
-        while ( $row = $res->fetch_array() ) {
-            $tmp = new stdClass();
-            $tmp->id                   = $row[0];
-            $tmp->name                 = $row[1];
-            $tmp->surname              = $row[2];
-            $tmp->dni                  = $row[3];
-            $tmp->birthday_date        = $row[4];
-            $tmp->gender               = $row[5];
-            $tmp->liscense             = $row[6];
-            $tmp->liscense_expiry_date = $row[7];
-            $tmp->club_id              = $row[8];
+
+        foreach ($response as $row) {
+            // $tmp = new stdClass();
+            $tmp = array(
+                'id'                  => $row['id'],
+                'name'                => $row['name'],
+                'last_name'           => $row['last_name'],
+                'dni'                 => $row['dni'],
+                'birth_date'          => $row['birth_date'],
+                'license_number'      => $row['license_number'],
+                'liscense_expiration' => $row['liscense_expiration'],
+                'gender'              => $row['gender'],
+                'gender'              => $row['gender'],
+                'belt'                => $row['cinturon'],
+                'club_id'             => $row['club_id']
+            );
+print_r( json_encode($tmp));exit;
 
             $rows[] = $tmp;
         }
-        print_r( json_encode( $rows ) );
+             print_r($rows);
+        // $db->close();
+$arr = array('a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5);
+             print_r($arr);exit;
+
+print_r( json_encode($rows));
+        // print_r( json_encode( $rows ) );
     }
 
 }
