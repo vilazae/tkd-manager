@@ -15,11 +15,21 @@ tkdApp.service('apiService', [ '$http', function( $http ) {
         return $http.post('backend/api.php', { action: 'list_competitors' } )
     }
 
+    function getChampionshipList () {
+        return $http.post('backend/api.php', { action: 'list_championships' } )
+    }
+
+    function getClubesList () {
+        return $http.post('backend/api.php', { action: 'list_clubes' } )
+    }
+
     return {
         apiMethod           : apiMethod,
         sayHello            : sayHello,
         getUsersList        : getUsersList,
-        getCompetitorsList : getCompetitorsList
+        getCompetitorsList : getCompetitorsList,
+        getChampionshipList : getChampionshipList,
+        getClubesList : getClubesList
     }
 
 } ] );

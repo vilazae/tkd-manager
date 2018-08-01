@@ -60,7 +60,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="tagline">Campeonatos</h1>
+                    <h1 class="tagline">Datos club</h1>
                 </div>
             </div>
         </div>
@@ -76,19 +76,19 @@
 
                 <table class="table table-bordered table-hover">
                     <thead>
-                        <th>Nombre torneo</th>
-                        <th>Fecha</th>
-                        <th>Lugar</th>
-                        <th>Abierto inscripción</th>
+                        <th>Nombre</th>
+                        <th>CIF</th>
+                        <th>Dirección</th>
+                        <th>Email</th>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="championship in campCtrl.championshipList track by $index" 
-                            ng-click="campCtrl.selectChampionship(championship, $index)"
-                            ng-class="{'selected': championship.selected}">
-                            <td>{{ championship.name }}</td>
-                            <td>{{ championship.date }}</td>
-                            <td>{{ championship.lugar }}</td>
-                            <td>{{ championship.abierto }}</td>
+                        <tr ng-repeat="club in clubCtrl.clubesList track by $index" 
+                            ng-click="clubCtrl.selectClub(club, $index)"
+                            ng-class="{'selected': club.selected}">
+                            <td>{{ club.name }}</td>
+                            <td>{{ club.cif }}</td>
+                            <td>{{ club.address }}</td>
+                            <td>{{ club.email }}</td>
                         </tr>
                                               
 
@@ -96,7 +96,7 @@
                 </table>
 
             </div>
-            <div class="col-sm-4" ng-if="campCtrl.showDetail">
+            <div class="col-sm-4" ng-if="clubCtrl.showDetail">
                 <!-- <div ng-style="compCtrl.detailHeigth"> -->
                 <!-- <div class="detail-competitor"> -->
                 <div class="detail-c">
@@ -108,22 +108,22 @@
 
                         </div>
                         <div class="caption">
-                            <h3>{{campCtrl.selectedChampionship.name}} {{campCtrl.selectedChampionship.lugar}}</h3>
+                            <h3>{{clubCtrl.selectedClub.name}} {{clubCtrl.selectedClub.address}}</h3>
                             <p>
                                 <div class="form-inline">
                                     <div class="form-group">
 
-                                        <kbd>DNI:</kbd>
+                                        <kbd>CIF:</kbd>
 
-                                        <span ng-if="!campCtrl.edit">{{campCtrl.selectedChampionship.date}}</span>
+                                        <span ng-if="!clubCtrl.edit">{{clubCtrl.selectedClub.cif}}</span>
 
-                                        <input ng-if="campCtrl.edit" 
+                                        <input ng-if="clubCtrl.edit" 
                                             type="date" 
                                             class="form-control edit-inline"
-                                            ng-model="campCtrl.selectedChampionship.date"
-                                            ng-keypress="campCtrl.aceptEdition($event);">
+                                            ng-model="clubCtrl.selectedChampionship.cif"
+                                            ng-keypress="clubCtrl.aceptEdition($event);">
 
-                                        <span ng-click="campCtrl.enterEdit();" class="edit-inline"></span>
+                                        <span ng-click="clubCtrl.enterEdit();" class="edit-inline"></span>
                                     </div>                                
                                 </div>
                             </p>

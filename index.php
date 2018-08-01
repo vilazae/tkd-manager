@@ -11,8 +11,8 @@
 				<div class="loginmodal-container">
 					<h1>Acceso a TKD Manager</h1><br>
 					<form action="./backend/login.php" method="post">
-						<input type="text" name="usuario" placeholder="Usuario">
-						<input type="password" name="password" placeholder="Contraseña">
+						<input type="text" name="usuario" placeholder="Usuario" required>
+						<input type="password" name="password" placeholder="Contraseña" required>
 						<input type="submit" name="login" class="login loginmodal-submit" value="Acceder">
 					</form>
 

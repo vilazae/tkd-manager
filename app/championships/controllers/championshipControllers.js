@@ -2,7 +2,7 @@ tkdApp.controller('championshipController', [ 'apiService', function( apiService
 console.log('ctrl saludo campeonatosController!');	
 	var me = this;
 	me.nombre = window.nombreUsuario;
-	me.saludo = 'hola men!';
+	me.saludo = 'hola ' + me.nombre;
 	
 	
 	apiService.sayHello(me.nombre)
@@ -15,7 +15,7 @@ console.log('ctrl saludo campeonatosController!');
 		console.log(data.data);
 	} );
 	
- 	apiService.getCompetitorsList()
+ 	apiService.getChampionshipList()
 	.then( function (data) {
 		console.log(data.data);
 	} );
