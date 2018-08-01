@@ -25,16 +25,17 @@ class DBConnection {
 
     /**
      * Connect to the database
-     * 
+     *
      * @return bool false on failure / mysqli MySQLi object instance on success
      */
-    
-    public function connect() {    
+
+    public function connect() {
         // Try and connect to the database
         if(!isset(self::$connection)) {
             self::$connection = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+            self::$connection->set_charset("utf8");
             // Load configuration as an array. Use the actual location of your configuration file
-            // $config = parse_ini_file('./config.ini'); 
+            // $config = parse_ini_file('./config.ini');
             // self::$connection = new mysqli('localhost',$config['username'],$config['password'],$config['dbname']);
         }
 
@@ -82,7 +83,7 @@ class DBConnection {
 
     /**
      * Fetch the last error from the database
-     * 
+     *
      * @return string Database error message
      */
     public function error() {
@@ -104,6 +105,6 @@ class DBConnection {
     public function close() {
         $connection = close();
     }
-    
+
 }
 ?>
