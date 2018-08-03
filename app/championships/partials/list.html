@@ -33,7 +33,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
+                <a class="navbar-brand" href="#">Inicio</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -113,9 +113,9 @@
                                 <div class="form-inline">
                                     <div class="form-group">
 
-                                        <kbd>DNI:</kbd>
+                                        <kbd>Nombre:</kbd>
 
-                                        <span ng-if="!campCtrl.edit">{{campCtrl.selectedChampionship.date}}</span>
+                                        <span ng-if="!campCtrl.edit">{{campCtrl.selectedChampionship.name}}</span>
 
                                         <input ng-if="campCtrl.edit" 
                                             type="date" 
@@ -132,11 +132,11 @@
 
 
 
-                            /*<p><kbd>Género:</kbd>{{campCtrl.selectedChampionship.gender}}</p>
-                            <p><kbd>Nacimiento:</kbd>{{compCtrl.selectedCompetitor.birthday_date}}</p>
-                            <p><kbd>Licencia:</kbd>{{compCtrl.selectedCompetitor.liscense}}</p>
-                            <p>*/
-                                <a class="btn btn-primary">Save</a> <a class="btn btn-default">Cancelg</a>
+                            <p><kbd>Lugar:</kbd>{{campCtrl.selectedChampionship.lugar}}</p>
+                            <p><kbd>Fecha:</kbd>{{campCtrl.selectedChampionship.date}}</p>
+                            <p>
+                                <a class="btn btn-primary" ng-click="campCtrl.updateChampionship()">Save</a> 
+                                <a class="btn btn-default">Cancelg</a>
                             </p>
                         </div>
 

@@ -28,7 +28,7 @@ if ( isSet( $data["action"] ) ) {
     }
 
     //  Users List.
-    if ( $data["action"] == "list_users" ) {
+    /*if ( $data["action"] == "list_users" ) {
         $res = $db -> query('SELECT * FROM tkd_usuarios;');
 
         $rows = array();
@@ -42,7 +42,7 @@ if ( isSet( $data["action"] ) ) {
             $rows[] = $tmp;
         }
         print_r( json_encode( $rows ) );
-    }
+    }*/
 
     //  Competitors List.
     if ( $data["action"] == "list_competitors" ) {
@@ -67,7 +67,6 @@ if ( isSet( $data["action"] ) ) {
                 'license_number'      => $row['license_number'],
                 'liscense_expiration' => $row['license_expiration_date'],
                 'gender'              => $row['gender'],
-                'gender'              => $row['gender'],
                 'belt'                => $row['cinturon'],
                 'club_id'             => $row['club_id']
             );
@@ -77,8 +76,29 @@ if ( isSet( $data["action"] ) ) {
 
         //  API response.
         print_r( json_encode( $rows ) );
-
     }
+
+    //  Update Competitor.
+    if ( $data["action"] == "update_competitor" ) {
+//print_r( $data["parameters"]);        
+        $mysqli = $db->connect();
+
+       print_r($data["parameters"]["id"]);
+
+        if ($mysqli->connect_errno) {
+            echo "Falló la conexión a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+        }
+
+        //  BD query.
+        //$response = $db->select("SELECT * FROM tkd_competitors;");
+
+
+        //  API response.
+        echo "dentro de update competitor";
+        //print_r( json_encode( $rows ) );
+    }
+
+
 
     //  Championship List.
     if ( $data["action"] == "list_championships" ) {
@@ -106,8 +126,7 @@ if ( isSet( $data["action"] ) ) {
         }
     
           
-        $db->close();
-        
+        //$db->close();
 
         print_r( json_encode($rows));
         
@@ -121,8 +140,6 @@ if ( isSet( $data["action"] ) ) {
         }
 
         $response = $db->select("SELECT * FROM tkd_clubs;");
-
-
 
         $rows = array();
         foreach ($response as $row) {
@@ -139,7 +156,7 @@ if ( isSet( $data["action"] ) ) {
             $rows[] = $tmp;
         }
     
-        $db->close();
+        //$db->close();
         print_r( json_encode($rows));
         
     }

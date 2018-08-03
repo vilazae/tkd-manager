@@ -33,19 +33,19 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
+                <a class="navbar-brand" href="#">Inicio</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">About</a>
+                        <a ui-sref="campeonatos">Campeonatos</a>
                     </li>
                     <li>
-                        <a href="#">Services</a>
+                        <a ui-sref="competidores">Competidores</a>
                     </li>
                     <li>
-                        <a href="#">Contact</a>
+                        <a ui-sref="clubes">Clubs</a>
                     </li>
                 </ul>
             </div>
@@ -108,7 +108,7 @@
 
                         </div>
                         <div class="caption">
-                            <h3>{{clubCtrl.selectedClub.name}} {{clubCtrl.selectedClub.address}}</h3>
+                            <h3>{{clubCtrl.selectedClub.name}}</h3>
                             <p>
                                 <div class="form-inline">
                                     <div class="form-group">
@@ -118,11 +118,10 @@
                                         <span ng-if="!clubCtrl.edit">{{clubCtrl.selectedClub.cif}}</span>
 
                                         <input ng-if="clubCtrl.edit" 
-                                            type="date" 
+                                            type="text" 
                                             class="form-control edit-inline"
                                             ng-model="clubCtrl.selectedChampionship.cif"
                                             ng-keypress="clubCtrl.aceptEdition($event);">
-
                                         <span ng-click="clubCtrl.enterEdit();" class="edit-inline"></span>
                                     </div>                                
                                 </div>
@@ -132,11 +131,10 @@
 
 
 
-                            /*<p><kbd>Género:</kbd>{{campCtrl.selectedChampionship.gender}}</p>
-                            <p><kbd>Nacimiento:</kbd>{{compCtrl.selectedCompetitor.birthday_date}}</p>
-                            <p><kbd>Licencia:</kbd>{{compCtrl.selectedCompetitor.liscense}}</p>
-                            <p>*/
-                                <a class="btn btn-primary">Save</a> <a class="btn btn-default">Cancelg</a>
+                            <p><kbd>Dirección:</kbd>{{clubCtrl.selectedClub.address}}</p>
+                            <p><kbd>Email:</kbd>{{clubCtrl.selectedClub.email}}</p>
+                            <p>
+                            	<a class="btn btn-primary">Save</a> <a class="btn btn-default">Cancelg</a>
                             </p>
                         </div>
 

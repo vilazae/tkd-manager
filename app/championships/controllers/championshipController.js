@@ -11,11 +11,8 @@ console.log('ctrl saludo campeonatosController!');
 
 	apiService.getChampionshipList()
 	.then( function (data) {
-console.log('data -- ',  angular.copy(data));		
+		console.log('data -- ',  angular.copy(data));		
 		me.championshipList = data.data;
-		me.championshipList = [{"id":"1","name":"Campeonato Pokemon","date":"2018-09-20","lugar":"Logroño","abierto":"1"},
-{"id":"2","name":"Campeonato Chester","date":"2018-09-20","lugar":"El Chester","abierto":"1"}]		
-
 	} );
 
 	me.selectChampionship = function ( championship ) {

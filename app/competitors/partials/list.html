@@ -45,7 +45,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand"
-                   href="#">Start Bootstrap</a>
+                   href="#">Inicio</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse"
@@ -101,11 +101,11 @@
                             ng-click="compCtrl.selectCompetitor(competitor, $index)"
                             ng-class="{'selected': competitor.selected}">
                             <td>{{ competitor.name }}</td>
-                            <td>{{ competitor.surname }}</td>
+                            <td>{{ competitor.last_name }}</td>
                             <td>{{ competitor.dni }}</td>
                             <td>{{ competitor.gender }}</td>
-                            <td>{{ competitor.birthday_date }}</td>
-                            <td>{{ competitor.liscense }}</td>
+                            <td>{{ competitor.birth_date }}</td>
+                            <td>{{ competitor.license_number }}</td>
                         </tr>
 
                     </tbody>
@@ -167,7 +167,7 @@
                             <p>
                                 <kbd>Licencia:</kbd>{{compCtrl.selectedCompetitor.liscense}}</p>
                             <p>
-                                <a class="btn btn-primary">Save</a>
+                                <a class="btn btn-primary" ng-click="compCtrl.updateCompetitor()">Save</a>
                                 <a class="btn btn-default">Cancelg</a>
                             </p>
                         </div>

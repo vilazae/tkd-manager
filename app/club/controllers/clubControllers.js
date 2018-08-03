@@ -7,12 +7,9 @@ tkdApp.controller('clubController', [ 'apiService', function( apiService ) {
 	me.clubesList = [];
 
 	apiService.getClubesList()
-	.then( function (data) {
-console.log('data -- ',  angular.copy(data));		
+	.then( function (data) {		
 		me.clubesList = data.data;
-me.clubesList = [{"id":"1","name":"Club Kim Taekwondo","cif":"16161616F","address":"C\ Duquesa de la Victoria 9 Bajo","email":"clubkim@gmail.com"},{"id":"1","name":"Club Kim Taekwondo","cif":"16161616F","address":"C\ Duquesa de la Victoria 9 Bajo","email":"clubkim@gmail.com"}
-		
-
+		console.log(data.data);
 	} );
 
 	me.selectClub = function ( club ) {

@@ -11,7 +11,7 @@ console.log('ctrl saludo campeonatosController!');
 
  	apiService.getCompetitorsList()
 	.then( function (data) {
-console.log('data -- ',  angular.copy(data));
+
 		me.competitorsList = data.data;
 
 	} );
@@ -36,6 +36,14 @@ console.log('data -- ',  angular.copy(data));
 			me.edit = false;
 		}
 	};
+
+	me.updateCompetitor = function () {
+		console.log('update')
+		apiService.updateCompetitor(me.selectedCompetitor)
+		.then( function (data) {
+			console.log(data.data);
+		} );
+	}
 
 
 
