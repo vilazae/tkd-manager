@@ -79,18 +79,74 @@ if ( isSet( $data["action"] ) ) {
     }
 
     //  Update Competitor.
-    if ( $data["action"] == "update_competitor" ) {
-//print_r( $data["parameters"]);        
+    if ( $data["action"] == "update_competitor" ) {   
         $mysqli = $db->connect();
 
-       print_r($data["parameters"]["id"]);
+        //print_r($data["parameters"]["id"]);
 
         if ($mysqli->connect_errno) {
             echo "Falló la conexión a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
         }
 
         //  BD query.
-        //$response = $db->select("SELECT * FROM tkd_competitors;");
+        $response = $db->query("UPDATE tkd_competitors
+            SET name = ". $data['parameters']['name'].",
+            last_name = ". $data['parameters']['last_name'].",
+            dni = ". $data['parameters']['dni'].",
+            birth_date = ". $data['parameters']['birth_date'].",
+            license_number = ". $data['parameters']['license_number'].",
+            license_expiration_date = ". $data['parameters']['license_expiration_date'].",
+            gender = ". $data['parameters']['gender'].",
+            cinturon = ". $data['parameters']['license_number'].",
+            club_id = ". $data['parameters']['license_number']."WHERE 
+            id = ". $data['parameters']['id'].";");
+
+
+        //  API response.
+        echo "dentro de update competitor";
+        //print_r( json_encode( $rows ) );
+    }
+
+    //  Add Competitor.
+    if ( $data["action"] == "add_competitor" ) {   
+        $mysqli = $db->connect();
+
+        //print_r($data["parameters"]["id"]);
+
+        if ($mysqli->connect_errno) {
+            echo "Falló la conexión a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+        }
+
+        //  BD query.
+        $response = $db->query("INSERT INTO tkd_competitors VALUES 
+            name = ". $data['parameters']['name'].",
+            last_name = ". $data['parameters']['last_name'].",
+            dni = ". $data['parameters']['dni'].",
+            birth_date = ". $data['parameters']['birth_date'].",
+            license_number = ". $data['parameters']['license_number'].",
+            license_expiration_date = ". $data['parameters']['license_expiration_date'].",
+            gender = ". $data['parameters']['gender'].",
+            cinturon = ". $data['parameters']['license_number'].",
+            club_id = ". $data['parameters']['license_number'].";");
+
+
+        //  API response.
+        echo "dentro de update competitor";
+        //print_r( json_encode( $rows ) );
+    }
+
+    //  Delete Competitor.
+    if ( $data["action"] == "delete_competitor" ) {   
+        $mysqli = $db->connect();
+
+        //print_r($data["parameters"]["id"]);
+
+        if ($mysqli->connect_errno) {
+            echo "Falló la conexión a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+        }
+
+        //  BD query.
+        $response = $db->query("DELETE FROM tkd_competitors WHERE id=" . $data['id'] . ";");
 
 
         //  API response.

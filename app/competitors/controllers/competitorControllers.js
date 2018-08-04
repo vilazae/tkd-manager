@@ -45,6 +45,21 @@ console.log('ctrl saludo campeonatosController!');
 		} );
 	}
 
+	me.deleteCompetitor = function () {
+		console.log('deleteCompetitor')
+		apiService.deleteCompetitor(me.selectedCompetitor.id)
+		.then( function (data) {
+			console.log(data.data);
+		} );
+	}
+
+	me.addCompetitor = function () {
+		console.log('addCompetitor')
+		apiService.addCompetitor(competitor)
+		.then( function (data) {
+			console.log(data.data);
+		} );
+	}
 
 
 

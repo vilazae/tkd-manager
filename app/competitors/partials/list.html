@@ -52,13 +52,13 @@
                  id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">About</a>
+                        <a ui-sref="campeonatos">Campeonatos</a>
                     </li>
                     <li>
-                        <a href="#">Services</a>
+                        <a ui-sref="competidores">Competidores</a>
                     </li>
                     <li>
-                        <a href="#">Contact</a>
+                        <a ui-sref="clubes">Clubs</a>
                     </li>
                 </ul>
             </div>
@@ -126,7 +126,7 @@
 
                         </div>
                         <div class="caption">
-                            <h3>{{compCtrl.selectedCompetitor.name}} {{compCtrl.selectedCompetitor.surname}}</h3>
+                            <h3>{{compCtrl.selectedCompetitor.name}} {{compCtrl.selectedCompetitor.last_name}}</h3>
                             <!-- DNI -->
                             <p>
                                 <div class="form-inline">
