@@ -17,13 +17,19 @@ console.log('ctrl saludo campeonatosController!');
 	} );
 
 	me.selectCompetitor = function ( competitor ) {
+		me.showDetail       = false;
+		me.selectedCompetitor = undefined;
 		angular.forEach(me.competitorsList, function (tmpComp) {
 			tmpComp.selected = false;
 		});
-		competitor.selected = true;
-		competitor.birthday_date = new Date( competitor.birthday_date ).toLocaleDateString();
-		me.selectedCompetitor = angular.copy( competitor );
-		me.showDetail = true;
+
+		if ( competitor ) {
+
+			competitor.selected                 = true;
+			me.selectedCompetitor               = angular.copy( competitor );
+			me.selectedCompetitor.birthday_date = new Date( competitor.birthday_date ).toLocaleDateString();
+			me.showDetail                       = true;
+		}
 
 	};
 
@@ -37,16 +43,19 @@ console.log('ctrl saludo campeonatosController!');
 		}
 	};
 
+	me.cancelUpdate = function () {
+		me.selectCompetitor( undefined );
+	};
+
 	me.updateCompetitor = function () {
-		console.log('update')
 		apiService.updateCompetitor(me.selectedCompetitor)
 		.then( function (data) {
 			console.log(data.data);
 		} );
 	}
 
+
 	me.deleteCompetitor = function () {
-		console.log('deleteCompetitor')
 		apiService.deleteCompetitor(me.selectedCompetitor.id)
 		.then( function (data) {
 			console.log(data.data);
@@ -54,7 +63,6 @@ console.log('ctrl saludo campeonatosController!');
 	}
 
 	me.addCompetitor = function () {
-		console.log('addCompetitor')
 		apiService.addCompetitor(competitor)
 		.then( function (data) {
 			console.log(data.data);

@@ -17,33 +17,10 @@ if ( !isSet($_SESSION['data']) ) $_SESSION['data']=array();
 $data = json_decode(file_get_contents('php://input'), true);
 
 if ( isSet( $data["action"] ) ) {
-    //  ** GREETINGS **  //
-    if ( $data["action"] == "say_hello" ) {
-        // echo( "eo eo hello Mr. " . $data['name'] );
-    }
 
-    if ( $data["action"] == "add_user" ) {
-        print_r('estoy en add user');
-        print_r($data['parameters']['name']); 
-    }
-
-    //  Users List.
-    /*if ( $data["action"] == "list_users" ) {
-        $res = $db -> query('SELECT * FROM tkd_usuarios;');
-
-        $rows = array();
-        while ( $row = $res->fetch_array() ) {
-            $tmp = new stdClass();
-            $tmp->id = $row[0];
-            $tmp->name = $row[1];
-            $tmp->surname = $row[2];
-            $tmp->email = $row[5];
-
-            $rows[] = $tmp;
-        }
-        print_r( json_encode( $rows ) );
-    }*/
-
+    /**
+     * COMPETITORS.
+     */
     //  Competitors List.
     if ( $data["action"] == "list_competitors" ) {
         $mysqli = $db->connect();
@@ -59,16 +36,16 @@ if ( isSet( $data["action"] ) ) {
         //  Format response.
         foreach ($response as $row) {
             $tmp = array(
-                'id'                  => $row['id'],
-                'name'                => $row['name'],
-                'last_name'           => $row['last_name'],
-                'dni'                 => $row['dni'],
-                'birth_date'          => $row['birth_date'],
-                'license_number'      => $row['license_number'],
-                'liscense_expiration' => $row['license_expiration_date'],
-                'gender'              => $row['gender'],
-                'belt'                => $row['cinturon'],
-                'club_id'             => $row['club_id']
+                'id'                      => $row['id'],
+                'name'                    => $row['name'],
+                'last_name'               => $row['last_name'],
+                'dni'                     => $row['dni'],
+                'birth_date'              => $row['birth_date'],
+                'license_number'          => $row['license_number'],
+                'license_expiration_date' => $row['license_expiration_date'],
+                'gender'                  => $row['gender'],
+                'belt'                    => $row['cinturon'],
+                'club_id'                 => $row['club_id']
             );
 
             $rows[] = $tmp;
@@ -79,7 +56,7 @@ if ( isSet( $data["action"] ) ) {
     }
 
     //  Update Competitor.
-    if ( $data["action"] == "update_competitor" ) {   
+    if ( $data["action"] == "update_competitor" ) {
         $mysqli = $db->connect();
 
         //print_r($data["parameters"]["id"]);
@@ -97,18 +74,18 @@ if ( isSet( $data["action"] ) ) {
             license_number = ". $data['parameters']['license_number'].",
             license_expiration_date = ". $data['parameters']['license_expiration_date'].",
             gender = ". $data['parameters']['gender'].",
-            cinturon = ". $data['parameters']['license_number'].",
-            club_id = ". $data['parameters']['license_number']."WHERE 
+            cinturon = ". $data['parameters']['belt'].",
+            club_id = ". $data['parameters']['club_id']."WHERE
             id = ". $data['parameters']['id'].";");
 
 
         //  API response.
-        echo "dentro de update competitor";
+        echo $response;
         //print_r( json_encode( $rows ) );
     }
 
     //  Add Competitor.
-    if ( $data["action"] == "add_competitor" ) {   
+    if ( $data["action"] == "add_competitor" ) {
         $mysqli = $db->connect();
 
         //print_r($data["parameters"]["id"]);
@@ -118,7 +95,7 @@ if ( isSet( $data["action"] ) ) {
         }
 
         //  BD query.
-        $response = $db->query("INSERT INTO tkd_competitors VALUES 
+        $response = $db->query("INSERT INTO tkd_competitors VALUES
             name = ". $data['parameters']['name'].",
             last_name = ". $data['parameters']['last_name'].",
             dni = ". $data['parameters']['dni'].",
@@ -126,8 +103,8 @@ if ( isSet( $data["action"] ) ) {
             license_number = ". $data['parameters']['license_number'].",
             license_expiration_date = ". $data['parameters']['license_expiration_date'].",
             gender = ". $data['parameters']['gender'].",
-            cinturon = ". $data['parameters']['license_number'].",
-            club_id = ". $data['parameters']['license_number'].";");
+            cinturon = ". $data['parameters']['belt'].",
+            club_id = ". $data['parameters']['club_id'].";");
 
 
         //  API response.
@@ -136,7 +113,7 @@ if ( isSet( $data["action"] ) ) {
     }
 
     //  Delete Competitor.
-    if ( $data["action"] == "delete_competitor" ) {   
+    if ( $data["action"] == "delete_competitor" ) {
         $mysqli = $db->connect();
 
         //print_r($data["parameters"]["id"]);
@@ -166,7 +143,7 @@ if ( isSet( $data["action"] ) ) {
         $response = $db->select("SELECT * FROM tkd_tournaments;");
 
         $rows = array();
-        
+
         foreach ($response as $row) {
             // $tmp = new stdClass();
             $tmp = array(
@@ -180,12 +157,12 @@ if ( isSet( $data["action"] ) ) {
 
             $rows[] = $tmp;
         }
-    
-          
+
+
         //$db->close();
 
         print_r( json_encode($rows));
-        
+
     }
 
     //  Clubes List.
@@ -211,10 +188,10 @@ if ( isSet( $data["action"] ) ) {
 
             $rows[] = $tmp;
         }
-    
+
         //$db->close();
         print_r( json_encode($rows));
-        
+
     }
 
 }

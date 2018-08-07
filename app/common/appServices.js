@@ -16,29 +16,29 @@ tkdApp.service('apiService', [ '$http', function( $http ) {
     }
 
     function updateCompetitor( competitor ) {
-        return $http.post('backend/api.php', 
-            { 
-                action: 'update_competitor', 
+        return $http.post('backend/api.php',
+            {
+                action: 'update_competitor',
                 parameters: {
-                    'id'                  : competitor['id'],
-                    'name'                : competitor['name'],
-                    'last_name'           : competitor['last_name'],
-                    'dni'                 : competitor['dni'],
-                    'birth_date'          : competitor['birth_date'],
-                    'license_number'      : competitor['license_number'],
-                    'liscense_expiration' : competitor['license_expiration_date'],
-                    'gender'              : competitor['gender'],
-                    'belt'                : competitor['cinturon'],
-                    'club_id'             : competitor['club_id']
+                    'id'                      : competitor['id'],
+                    'name'                    : competitor['name'],
+                    'last_name'               : competitor['last_name'],
+                    'dni'                     : competitor['dni'],
+                    'birth_date'              : competitor['birth_date'],
+                    'license_number'          : competitor['license_number'],
+                    'license_expiration_date' : competitor['license_expiration_date'],
+                    'gender'                  : competitor['gender'],
+                    'belt'                    : competitor['belt'],
+                    'club_id'                 : competitor['club_id']
                 }
-            } 
+            }
         );
     }
 
     function addCompetitor( competitor ) {
-        return $http.post('backend/api.php', 
-            { 
-                action: 'add_competitor', 
+        return $http.post('backend/api.php',
+            {
+                action: 'add_competitor',
                 parameters: {
                     'id'                  : competitor['id'],
                     'name'                : competitor['name'],
@@ -46,12 +46,12 @@ tkdApp.service('apiService', [ '$http', function( $http ) {
                     'dni'                 : competitor['dni'],
                     'birth_date'          : competitor['birth_date'],
                     'license_number'      : competitor['license_number'],
-                    'liscense_expiration' : competitor['license_expiration_date'],
+                    'license_expiration_date' : competitor['license_expiration_date'],
                     'gender'              : competitor['gender'],
-                    'belt'                : competitor['cinturon'],
+                    'belt'                : competitor['belt'],
                     'club_id'             : competitor['club_id']
                 }
-            } 
+            }
         );
     }
 
@@ -76,7 +76,7 @@ tkdApp.service('apiService', [ '$http', function( $http ) {
         addCompetitor : addCompetitor,
         deleteCompetitor : deleteCompetitor,
         getChampionshipList : getChampionshipList,
-        getClubesList : getClubesList        
+        getClubesList : getClubesList
     }
 
 } ] );
