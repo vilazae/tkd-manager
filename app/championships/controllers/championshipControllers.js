@@ -26,6 +26,17 @@ console.log('ctrl saludo campeonatosController!');
 
 	};
 
+	me.cancelUpdate = function () {
+		me.selectedChampionship( undefined );
+	};
+
+	me.updateChampionship = function () {
+		apiService.updateChampionship(me.selectedChampionship)
+		.then( function (data) {
+			console.log(data.data);
+		} );
+	}
+
 	me.enterEdit = function ( ) {
 		me.edit = true;
 	};

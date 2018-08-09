@@ -66,22 +66,21 @@ if ( isSet( $data["action"] ) ) {
         }
 
         //  BD query.
-        $response = $db->query("UPDATE tkd_competitors
-            SET name = ". $data['parameters']['name'].",
-            last_name = ". $data['parameters']['last_name'].",
-            dni = ". $data['parameters']['dni'].",
-            birth_date = ". $data['parameters']['birth_date'].",
-            license_number = ". $data['parameters']['license_number'].",
-            license_expiration_date = ". $data['parameters']['license_expiration_date'].",
-            gender = ". $data['parameters']['gender'].",
-            cinturon = ". $data['parameters']['belt'].",
-            club_id = ". $data['parameters']['club_id']."WHERE
-            id = ". $data['parameters']['id'].";");
+        $sentencia = $mysqli->prepare("UPDATE tkd_competitors
+            SET name = ?, last_name = ?, dni = ?, birth_date = ?, license_number = ?,
+            license_expiration_date = ?, gender = ?, cinturon = ?, club_id = ? WHERE
+            id = ?");
+        $sentencia->bind_param("ssssssssii", $data['parameters']['name'], $data['parameters']['last_name'], $data['parameters']['dni'], $data['parameters']['birth_date'], $data['parameters']['license_number'], $data['parameters']['license_expiration_date'], $data['parameters']['gender'], $data['parameters']['belt'], $data['parameters']['club_id'], $data['parameters']['id']);
+        $sentencia->execute();
 
-
-        //  API response.
-        echo $response;
-        //print_r( json_encode( $rows ) );
+        if(!$sentencia)
+        {
+            print_r("UPDATE Competitor ABORT");                
+        }
+        else
+        {
+            print_r("UPDATE Competitor OK");
+        } 
     }
 
     //  Add Competitor.
@@ -95,21 +94,20 @@ if ( isSet( $data["action"] ) ) {
         }
 
         //  BD query.
-        $response = $db->query("INSERT INTO tkd_competitors VALUES
-            name = ". $data['parameters']['name'].",
-            last_name = ". $data['parameters']['last_name'].",
-            dni = ". $data['parameters']['dni'].",
-            birth_date = ". $data['parameters']['birth_date'].",
-            license_number = ". $data['parameters']['license_number'].",
-            license_expiration_date = ". $data['parameters']['license_expiration_date'].",
-            gender = ". $data['parameters']['gender'].",
-            cinturon = ". $data['parameters']['belt'].",
-            club_id = ". $data['parameters']['club_id'].";");
+        $sentencia = $mysqli->prepare("INSERT INTO tkd_competitors VALUES
+            name = ?, last_name = ?, dni = ?, birth_date = ?, license_number = ?,
+            license_expiration_date = ?, gender = ?, cinturon = ?, club_id = ? ");
+        $sentencia->bind_param("ssssssssi", $data['parameters']['name'], $data['parameters']['last_name'], $data['parameters']['dni'], $data['parameters']['birth_date'], $data['parameters']['license_number'], $data['parameters']['license_expiration_date'], $data['parameters']['gender'], $data['parameters']['belt'], $data['parameters']['club_id']);
+        $sentencia->execute();
 
-
-        //  API response.
-        echo "dentro de update competitor";
-        //print_r( json_encode( $rows ) );
+        if(!$sentencia)
+        {
+            print_r("INSERT Competitor ABORT");                
+        }
+        else
+        {
+            print_r("INSERT Competitor OK");
+        } 
     }
 
     //  Delete Competitor.
@@ -124,14 +122,20 @@ if ( isSet( $data["action"] ) ) {
 
         //  BD query.
         $response = $db->query("DELETE FROM tkd_competitors WHERE id=" . $data['id'] . ";");
-
+        if(!$result)
+        {
+            echo("INSERT ABORT");                
+        }
+        else{
+            echo("INSERT OK");
+        }  
 
         //  API response.
         echo "dentro de update competitor";
         //print_r( json_encode( $rows ) );
     }
 
-
+    //CHAMPIONSHIP
 
     //  Championship List.
     if ( $data["action"] == "list_championships" ) {
@@ -165,6 +169,35 @@ if ( isSet( $data["action"] ) ) {
 
     }
 
+    //  Update Championship.
+    if ( $data["action"] == "update_championship" ) {
+        $mysqli = $db->connect();
+
+        print_r("Se van a actualizar los datos de un torneo");
+
+        if ($mysqli->connect_errno) {
+            echo "Falló la conexión a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+        }
+
+        //  BD query.
+        $sentencia = $mysqli->prepare("UPDATE tkd_tournaments
+            SET name = ?, date = ?, lugar = ?, abierto = ? WHERE
+            id = ?");
+        $sentencia->bind_param("sssii", $data['parameters']['name'], $data['parameters']['date'], $data['parameters']['lugar'], $data['parameters']['abierto'], $data['parameters']['id']);
+        $sentencia->execute();
+
+        if(!$sentencia)
+        {
+            print_r("UPDATE Championship ABORT");                
+        }
+        else
+        {
+            print_r("UPDATE Championship OK");
+        } 
+    }
+
+    //CLUB
+
     //  Clubes List.
     if ( $data["action"] == "list_clubes" ) {
         $mysqli = $db->connect();
@@ -192,6 +225,30 @@ if ( isSet( $data["action"] ) ) {
         //$db->close();
         print_r( json_encode($rows));
 
+    }
+
+    //  Update Club.
+    if ( $data["action"] == "update_club" ) {
+        $mysqli = $db->connect();
+
+        if ($mysqli->connect_errno) {
+            echo "Falló la conexión a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+        }
+
+        //  BD query.
+        $sentencia = $mysqli->prepare("UPDATE tkd_clubs
+            SET name = ?, cif = ?, address = ?, email = ? WHERE id = ?");
+        $sentencia->bind_param("ssssi", $data['parameters']['name'], $data['parameters']['cif'], $data['parameters']['address'], $data['parameters']['email'], $data['parameters']['id']);
+        $sentencia->execute();
+
+        if(!$sentencia)
+        {
+            print_r("UPDATE Club ABORT");                
+        }
+        else
+        {
+            print_r("UPDATE Club OK");
+        } 
     }
 
 }

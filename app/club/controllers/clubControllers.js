@@ -32,6 +32,16 @@ tkdApp.controller('clubController', [ 'apiService', function( apiService ) {
 		}
 	};
  
+ 	me.cancelUpdate = function () {
+		me.selectCompetitor( undefined );
+	};
+
+	me.updateClub = function () {
+		apiService.updateClub(me.selectedClub)
+		.then( function (data) {
+			console.log(data.data);
+		} );
+	}
 
 	
 	
