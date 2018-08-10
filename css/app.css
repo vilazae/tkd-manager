@@ -31,6 +31,10 @@ img.img-circle.img-responsive.img-center {
     height: 218px;
 }
 
+.margin-bottom-15 {
+    margin-bottom: 15px;
+}
+
 
 span.edit-inline {
     cursor: pointer;

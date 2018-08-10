@@ -3,6 +3,7 @@ console.log('ctrl saludo campeonatosController!');
 	var me = this;
 
 	me.competitorsList = [];
+	me.showTable       = true;
 
 	apiService.sayHello(me.nombre)
 	.then( function (data) {
@@ -25,11 +26,21 @@ console.log('ctrl saludo campeonatosController!');
 
 		if ( competitor ) {
 
-			competitor.selected                 = true;
-			me.selectedCompetitor               = angular.copy( competitor );
-			me.selectedCompetitor.birthday_date = new Date( competitor.birthday_date ).toLocaleDateString();
-			me.showDetail                       = true;
+			competitor.selected                    = true;
+			me.selectedCompetitor                  = angular.copy( competitor );
+			me.selectedCompetitor.birthday_date    = new Date( competitor.birthday_date ).toLocaleDateString();
+			me.selectedCompetitor.public_name      = angular.copy(competitor.name);
+			me.selectedCompetitor.public_last_name = angular.copy(competitor.last_name);
+			me.showDetail                          = true;
 		}
+
+	};
+
+	me.addNewCompetitor = function ( competitor ) {
+
+		me.selectedCompetitor = undefined;
+		me.showTable          = false;
+		me.showDetail         = true;
 
 	};
 
@@ -63,7 +74,8 @@ console.log('ctrl saludo campeonatosController!');
 	}
 
 	me.addCompetitor = function () {
-		apiService.addCompetitor(competitor)
+		me.showTable = true;
+		apiService.addCompetitor(me.selectCompetitor)
 		.then( function (data) {
 			console.log(data.data);
 		} );
