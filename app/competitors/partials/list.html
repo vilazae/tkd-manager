@@ -70,6 +70,7 @@
                     <th>Sexo</th>
                     <th>Fecha Nacimineto</th>
                     <th>Nº Licencia</th>
+                    <th></th>
                 </thead>
                 <tbody>
                     <tr ng-repeat="competitor in compCtrl.competitorsList track by $index"
@@ -81,6 +82,8 @@
                         <td>{{ competitor.gender }}</td>
                         <td>{{ competitor.birth_date }}</td>
                         <td>{{ competitor.license_number }}</td>
+                        <td><a class="btn btn-danger"
+                               ng-click="compCtrl.deleteCompetitor(competitor.id)"');>Eliminar</a></td>
                     </tr>
 
                 </tbody>

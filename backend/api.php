@@ -124,14 +124,13 @@ if ( isSet( $data["action"] ) ) {
         $response = $db->query("DELETE FROM tkd_competitors WHERE id=" . $data['id'] . ";");
         if(!$result)
         {
-            echo("INSERT ABORT");                
+            echo("DELETE ABORT");                
         }
         else{
-            echo("INSERT OK");
+            echo("DELETE OK competidor con id: ". $data['id'] );
         }  
 
         //  API response.
-        echo "dentro de update competitor";
         //print_r( json_encode( $rows ) );
     }
 

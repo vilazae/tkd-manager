@@ -55,8 +55,8 @@ console.log('ctrl saludo campeonatosController!');
 	}
 
 
-	me.deleteCompetitor = function () {
-		apiService.deleteCompetitor(me.selectedCompetitor.id)
+	me.deleteCompetitor = function (id) {
+		apiService.deleteCompetitor(id)
 		.then( function (data) {
 			console.log(data.data);
 		} );
