@@ -1,16 +1,13 @@
-tkdApp.controller('inscripcionController', [ 'apiService', '$state', function( apiService, $state ) {
+tkdApp.controller('inscripcionController', [ 'apiService', '$state', '$stateParams', function( apiService, $state, $stateParams ) {
 console.log('ctrl saludo inscripcionController!', $state);
+console.log($stateParams)
 	var me = this;
 
 	me.inscripscionesList = [];
 	me.showTable       = true;
 
 	me.championshipId = $state.params.id;
-
-	apiService.sayHello(me.nombre)
-	.then( function (data) {
-		console.log(data.data);
-	} );
+	me.championshipName = $state.params.championshipName;
 
  	apiService.getCompetitorsList()
 	.then( function (data) {
@@ -19,72 +16,31 @@ console.log('ctrl saludo inscripcionController!', $state);
 
 	} );
 
-	me.selectCompetitor = function ( competitor ) {
-		me.showDetail       = false;
-		me.selectedCompetitor = undefined;
-		angular.forEach(me.inscripscionesList, function (tmpInscrip) {
-			tmpInscrip.selected = false;
-		});
+	/**
+	 *	Add the selected competitors to the current Championship.
+	 */
+	me.addToChampionship = function () {
 
-		if ( competitor ) {
+		var userIs = [];
+		angular.forEach( me.inscripscionesList, function( competitor ) {
+			if ( competitor.selected ) {
+				userIs.push( competitor.id );
+			}
 
-			competitor.selected                    = true;
-			me.selectedCompetitor                  = angular.copy( competitor );
-			me.selectedCompetitor.birthday_date    = new Date( competitor.birthday_date ).toLocaleDateString();
-			me.selectedCompetitor.public_name      = angular.copy(competitor.name);
-			me.selectedCompetitor.public_last_name = angular.copy(competitor.last_name);
-			me.showDetail                          = true;
+		} );
+
+		//	Check if there is any selected.
+		if ( userIs.length > 0 ) {
+ 			apiService.joinToChampionship( me.championshipId, userIs )
+ 			.then( function( response ) {
+ 				alert( "Los competidores fueron añadidos con éxito!")
+ 			} ).catch( function ( error ) {
+ 				console.error( error )
+ 			})
+			
 		}
 
 	};
-
-	/*me.addNewCompetitor = function ( competitor ) {
-
-		me.selectedCompetitor = undefined;
-		me.showTable          = false;
-		me.showDetail         = true;
-
-	};
-
-	me.enterEdit = function ( ) {
-		me.edit = true;
-	};
-
-	me.aceptEdition = function ( event ) {
-		if ( event.which === 13 ) {
-			me.edit = false;
-		}
-	};
-
-	me.cancelUpdate = function () {
-		me.selectCompetitor( undefined );
-	};
-
-	me.updateCompetitor = function () {
-		apiService.updateCompetitor(me.selectedCompetitor)
-		.then( function (data) {
-			console.log(data.data);
-		} );
-	}
-
-
-	me.deleteCompetitor = function (id) {
-		apiService.deleteCompetitor(id)
-		.then( function (data) {
-			console.log(data.data);
-		} );
-	}
-
-	me.addCompetitor = function () {
-		me.showTable = true;
-		apiService.addCompetitor(competitor)
-		.then( function (data) {
-			console.log(data.data);
-		} );
-	}*/
-
-
-
 
 
 } ] );

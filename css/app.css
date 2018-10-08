@@ -95,10 +95,31 @@ kbd {
     text-align: center;
 }
 
-.competitor-backgournd {
+.competitor-background {
     height: 236px;
     margin-left: -4px;
     background: url(./img/taekwondo_comp.jpg) center center no-repeat scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+
+}
+
+.championship-background {
+    height: 236px;
+    margin-left: -4px;
+    background: url(./img/championship.jpg) center center no-repeat scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.clubs-background {
+    height: 236px;
+    margin-left: -4px;
+    background: url(./img/club.jpg) center center no-repeat scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
