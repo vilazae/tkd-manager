@@ -65,6 +65,13 @@ tkdApp.controller('championshipController', [ 'apiService', function( apiService
 		} );
 	}
 
+	me.cerrarChampionship = function (campeonato) {
+		apiService.cerrarChampionship(campeonato)
+		.then( function (data) {
+			console.log(data.data);
+		} );
+	}
+
 	me.deleteChampionship = function (id) {
 		apiService.deleteChampionship(id)
 		.then( function (data) {

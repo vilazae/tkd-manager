@@ -75,7 +75,7 @@ console.log('ctrl saludo campeonatosController!');
 
 	me.addCompetitor = function () {
 		me.showTable = true;
-		apiService.addCompetitor(competitor)
+		apiService.addCompetitor(me.selectedCompetitor)
 		.then( function (data) {
 			console.log(data.data);
 		} );

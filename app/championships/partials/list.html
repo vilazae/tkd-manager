@@ -107,7 +107,8 @@
                                ng-click="deleteChampionship.deleteClub(club.id)">Eliminar</a>
                             </td>
                             <td><a class="btn btn-info"
-                               ng-click="">Cerrar campeonato</a></td>
+                                
+                               ng-click="campCtrl.cerrarChampionship(campeonato)">Cerrar campeonato</a></td>
                             <td><a class="btn btn-info"
                                ng-click="" ui-sref="inscribir({id: campeonato.id})">Inscribir participantes</a></td>
                         </tr>

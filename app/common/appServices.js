@@ -80,6 +80,17 @@ tkdApp.service('apiService', [ '$http', function( $http ) {
         );
     }
 
+    function cerrarChampionship( championship ) {
+        return $http.post('backend/api.php',
+            {
+                action: 'cerrar_championship',
+                parameters: {
+                    'id'                      : championship['id'],                    
+                }
+            }
+        );
+    }
+
     function deleteChampionship( championship_id ) {
         return $http.post('backend/api.php', { action: 'delete_championship', id: championship_id } )
     }
@@ -118,6 +129,7 @@ tkdApp.service('apiService', [ '$http', function( $http ) {
         deleteCompetitor : deleteCompetitor,
         getChampionshipList : getChampionshipList,
         updateChampionship : updateChampionship,
+        cerrarChampionship : cerrarChampionship,
         deleteChampionship : deleteChampionship,
         getClubesList : getClubesList,
         updateClub : updateClub,
