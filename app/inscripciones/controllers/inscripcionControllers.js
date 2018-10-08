@@ -1,9 +1,11 @@
-tkdApp.controller('inscripcionController', [ 'apiService', function( apiService ) {
-console.log('ctrl saludo inscripcionController!');
+tkdApp.controller('inscripcionController', [ 'apiService', '$state', function( apiService, $state ) {
+console.log('ctrl saludo inscripcionController!', $state);
 	var me = this;
 
 	me.inscripscionesList = [];
 	me.showTable       = true;
+
+	me.championshipId = $state.params.id;
 
 	apiService.sayHello(me.nombre)
 	.then( function (data) {
