@@ -168,10 +168,11 @@
                         </p>
                         <p>
                             <a class="btn btn-primary"
+                                ng-if="clubCtrl.selectedClub.id"
                                ng-click="clubCtrl.updateClub()">Actualizar</a>
                             <a class="btn btn-primary"
                                ng-if="!clubCtrl.selectedClub.id"
-                               ng-click="compCtrl.addClub(clubCtrl.selectedClub)">Añadir</a>
+                               ng-click="clubCtrl.addClub()">Añadir</a>
                             <a class="btn btn-default"
                                ng-click="clubCtrl.cancelUpdate()">Cancel</a>
                         </p>

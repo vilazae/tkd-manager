@@ -93,20 +93,8 @@ if ( isSet( $data["action"] ) ) {
             echo "Falló la conexión a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
         }
 
-        /*print_r($data['parameters']['name']);
-        print_r($data['parameters']['last_name']);
-        print_r($data['parameters']['dni']);
-        print_r($data['parameters']['birth_date']);
-        print_r($data['parameters']['license_number']);
-        print_r($data['parameters']['license_expiration_date']);
-        print_r($data['parameters']['gender']);
-        print_r($data['parameters']['belt']);
-        print_r($data['parameters']['club_id']);*/
-
         //  BD query.
-        $sentencia = $mysqli->prepare("INSERT INTO tkd_competitors VALUES
-            name = ?, last_name = ?, dni = ?, birth_date = ?, license_number = ?,
-            license_expiration_date = ?, gender = ?, cinturon = ?, club_id = ? ");
+        $sentencia = $mysqli->prepare("INSERT INTO tkd_competitors(name, last_name, dni, birth_date, license_number, license_expiration_date, gender, cinturon, club_id) VALUES (?,?,?,?,?,?,?,?,?) ");
         $sentencia->bind_param("sssdsdssi", $data['parameters']['name'], $data['parameters']['last_name'], $data['parameters']['dni'], $data['parameters']['birth_date'], $data['parameters']['license_number'], $data['parameters']['license_expiration_date'], $data['parameters']['gender'], $data['parameters']['belt'], $data['parameters']['club_id']);
         $sentencia->execute();
 
@@ -153,7 +141,7 @@ if ( isSet( $data["action"] ) ) {
         echo "Falló la conexión a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
         }
 
-        $response = $db->select("SELECT * FROM tkd_tournaments;");
+        $response = $db->select("SELECT * FROM tkd_tournaments where abierto = 1;");
 
         $rows = array();
 
@@ -176,6 +164,29 @@ if ( isSet( $data["action"] ) ) {
 
         print_r( json_encode($rows));
 
+    }
+
+    //  Add Championship.
+    if ( $data["action"] == "add_championship" ) {
+        $mysqli = $db->connect();
+
+        if ($mysqli->connect_errno) {
+            echo "Falló la conexión a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+        }
+
+        //  BD query.
+        $sentencia = $mysqli->prepare("INSERT INTO tkd_tournaments(name, date, lugar, abierto) VALUES (?,?,?,?) ");
+        $sentencia->bind_param("ssss", $data['parameters']['name'], $data['parameters']['date'], $data['parameters']['lugar'], $data['parameters']['abierto']);
+        $sentencia->execute();
+
+        if(!$sentencia)
+        {
+            print_r("INSERT Championship ABORT");                
+        }
+        else
+        {
+            print_r("INSERT Championship OK");
+        } 
     }
 
     //  Update Championship.
@@ -285,6 +296,29 @@ if ( isSet( $data["action"] ) ) {
         //$db->close();
         print_r( json_encode($rows));
 
+    }
+
+    //  Add Club.
+    if ( $data["action"] == "add_club" ) {
+        $mysqli = $db->connect();
+
+        if ($mysqli->connect_errno) {
+            echo "Falló la conexión a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+        }
+
+        //  BD query.
+        $sentencia = $mysqli->prepare("INSERT INTO tkd_clubs (name, cif, address, email) VALUES (?,?,?,?) ");
+        $sentencia->bind_param("ssss", $data['parameters']['name'], $data['parameters']['cif'], $data['parameters']['address'], $data['parameters']['email']);
+        $sentencia->execute();
+
+        if(!$sentencia)
+        {
+            print_r("INSERT Club ABORT");                
+        }
+        else
+        {
+            print_r("INSERT Club OK");
+        } 
     }
 
     //  Update Club.

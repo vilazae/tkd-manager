@@ -89,7 +89,7 @@ tkdApp.controller('championshipController', [ 'apiService', function( apiService
 
 	me.addChampionship = function () {
 		me.showTable = true;
-		apiService.addChampionship(campeonato)
+		apiService.addChampionship(me.selectedChampionship)
 		.then( function (data) {
 			console.log(data.data);
 		} );

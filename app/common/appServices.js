@@ -65,6 +65,21 @@ tkdApp.service('apiService', [ '$http', function( $http ) {
         return $http.post('backend/api.php', { action: 'list_championships' } )
     }
 
+    function addChampionship( championship ) {
+        return $http.post('backend/api.php',
+            {
+                action: 'add_championship',
+                parameters: {
+                    'id'                  : championship['id'],
+                    'name'                : championship['name'],
+                    'date'           : championship['date'],
+                    'lugar'                 : championship['lugar'],
+                    'abierto'          : championship['abierto']
+                }
+            }
+        );
+    }
+
     function updateChampionship( championship ) {
         return $http.post('backend/api.php',
             {
@@ -100,6 +115,21 @@ tkdApp.service('apiService', [ '$http', function( $http ) {
         return $http.post('backend/api.php', { action: 'list_clubes' } )
     }
 
+    function addClub( club ) {
+        return $http.post('backend/api.php',
+            {
+                action: 'add_club',
+                parameters: {
+                    'id'                  : club['id'],
+                    'name'                : club['name'],
+                    'cif'           : club['cif'],
+                    'address'                 : club['address'],
+                    'email'          : club['email']
+                }
+            }
+        );
+    }
+
     function updateClub( club ) {
         return $http.post('backend/api.php',
             {
@@ -128,10 +158,12 @@ tkdApp.service('apiService', [ '$http', function( $http ) {
         addCompetitor : addCompetitor,
         deleteCompetitor : deleteCompetitor,
         getChampionshipList : getChampionshipList,
+        addChampionship : addChampionship,
         updateChampionship : updateChampionship,
         cerrarChampionship : cerrarChampionship,
         deleteChampionship : deleteChampionship,
         getClubesList : getClubesList,
+        addClub : addClub,
         updateClub : updateClub,
         deleteClub : deleteClub
     }

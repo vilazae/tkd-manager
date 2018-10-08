@@ -60,7 +60,7 @@ tkdApp.controller('clubController', [ 'apiService', function( apiService ) {
 
 	me.addClub = function () {
 		me.showTable = true;
-		apiService.addClub(club)
+		apiService.addClub(me.selectedClub)
 		.then( function (data) {
 			console.log(data.data);
 		} );
