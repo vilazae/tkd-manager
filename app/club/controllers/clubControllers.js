@@ -43,8 +43,27 @@ tkdApp.controller('clubController', [ 'apiService', function( apiService ) {
 		} );
 	}
 
+	me.deleteClub = function (id) {
+		apiService.deleteClub(id)
+		.then( function (data) {
+			console.log(data.data);
+		} );
+	}
 	
-	
-	
+	me.addNewClub = function ( club ) {
+
+		me.selectedClub = undefined;
+		me.showTable          = false;
+		me.showDetail         = true;
+
+	};
+
+	me.addClub = function () {
+		me.showTable = true;
+		apiService.addClub(club)
+		.then( function (data) {
+			console.log(data.data);
+		} );
+	}
 	
 } ] );

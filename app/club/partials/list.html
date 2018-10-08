@@ -76,7 +76,14 @@
     <div class="container">
 
         <hr>
-
+        <div class="row">
+            <div class="col-sm-8 text-right">
+                <button class="btn btn-info margin-bottom-15"
+                ng-click="clubCtrl.addNewClub()">
+                <span class="glyphicon glyphicon-plus"></span>
+                Insertar nuevo club</button>
+            </div>
+        </div>
         <div class="row">
             <div class="col-sm-8">
 
@@ -86,6 +93,7 @@
                         <th>CIF</th>
                         <th>Dirección</th>
                         <th>Email</th>
+                        <th></th>
                     </thead>
                     <tbody>
                         <tr ng-repeat="club in clubCtrl.clubesList track by $index" 
@@ -95,6 +103,9 @@
                             <td>{{ club.cif }}</td>
                             <td>{{ club.address }}</td>
                             <td>{{ club.email }}</td>
+                            <td><a class="btn btn-danger"
+                               ng-click="clubCtrl.deleteClub(club.id)">Eliminar</a>
+                            </td>
                         </tr>
                                               
 
@@ -157,7 +168,10 @@
                         </p>
                         <p>
                             <a class="btn btn-primary"
-                               ng-click="clubCtrl.updateClub()">Save</a>
+                               ng-click="clubCtrl.updateClub()">Actualizar</a>
+                            <a class="btn btn-primary"
+                               ng-if="!clubCtrl.selectedClub.id"
+                               ng-click="compCtrl.addClub(clubCtrl.selectedClub)">Añadir</a>
                             <a class="btn btn-default"
                                ng-click="clubCtrl.cancelUpdate()">Cancel</a>
                         </p>

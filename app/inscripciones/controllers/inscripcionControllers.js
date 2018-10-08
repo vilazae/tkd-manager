@@ -1,8 +1,8 @@
-tkdApp.controller('competitorController', [ 'apiService', function( apiService ) {
-console.log('ctrl saludo campeonatosController!');
+tkdApp.controller('inscripcionController', [ 'apiService', function( apiService ) {
+console.log('ctrl saludo inscripcionController!');
 	var me = this;
 
-	me.competitorsList = [];
+	me.inscripscionesList = [];
 	me.showTable       = true;
 
 	apiService.sayHello(me.nombre)
@@ -13,15 +13,15 @@ console.log('ctrl saludo campeonatosController!');
  	apiService.getCompetitorsList()
 	.then( function (data) {
 
-		me.competitorsList = data.data;
+		me.inscripscionesList = data.data;
 
 	} );
 
 	me.selectCompetitor = function ( competitor ) {
 		me.showDetail       = false;
 		me.selectedCompetitor = undefined;
-		angular.forEach(me.competitorsList, function (tmpComp) {
-			tmpComp.selected = false;
+		angular.forEach(me.inscripscionesList, function (tmpInscrip) {
+			tmpInscrip.selected = false;
 		});
 
 		if ( competitor ) {
@@ -36,7 +36,7 @@ console.log('ctrl saludo campeonatosController!');
 
 	};
 
-	me.addNewCompetitor = function ( competitor ) {
+	/*me.addNewCompetitor = function ( competitor ) {
 
 		me.selectedCompetitor = undefined;
 		me.showTable          = false;
@@ -79,7 +79,7 @@ console.log('ctrl saludo campeonatosController!');
 		.then( function (data) {
 			console.log(data.data);
 		} );
-	}
+	}*/
 
 
 

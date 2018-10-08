@@ -66,7 +66,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="tagline">Campeonatos</h1>
+                    <h1 class="tagline">Datos club</h1>
                 </div>
             </div>
         </div>
@@ -76,25 +76,40 @@
     <div class="container">
 
         <hr>
-
+        <div class="row">
+            <div class="col-sm-8 text-right">
+                <button class="btn btn-info margin-bottom-15"
+                ng-click="campCtrl.addNewChampionship()">
+                <span class="glyphicon glyphicon-plus"></span>
+                Insertar nuevo campeonato</button>
+            </div>
+        </div>
         <div class="row">
             <div class="col-sm-8">
 
                 <table class="table table-bordered table-hover">
                     <thead>
-                        <th>Nombre torneo</th>
+                        <th>Nombre campeonato</th>
                         <th>Fecha</th>
                         <th>Lugar</th>
-                        <th>Abierto inscripción</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="championship in campCtrl.championshipList track by $index" 
-                            ng-click="campCtrl.selectChampionship(championship, $index)"
-                            ng-class="{'selected': championship.selected}">
-                            <td>{{ championship.name }}</td>
-                            <td>{{ championship.date }}</td>
-                            <td>{{ championship.lugar }}</td>
-                            <td>{{ championship.abierto }}</td>
+                        <tr ng-repeat="campeonato in campCtrl.championshipList track by $index" 
+                            ng-click="campCtrl.selectChampionship(campeonato, $index)"
+                            ng-class="{'selected': campeonato.selected}">
+                            <td>{{ campeonato.name }}</td>
+                            <td>{{ campeonato.date }}</td>
+                            <td>{{ campeonato.lugar }}</td>
+                            <td><a class="btn btn-danger"
+                               ng-click="deleteChampionship.deleteClub(club.id)">Eliminar</a>
+                            </td>
+                            <td><a class="btn btn-info"
+                               ng-click="">Cerrar campeonato</a></td>
+                            <td><a class="btn btn-info"
+                               ng-click="" ui-sref="inscribir({id: campeonato.id})">Inscribir participantes</a></td>
                         </tr>
                                               
 
@@ -114,11 +129,18 @@
 
                         </div>
                         <div class="caption">
-                            <h3>{{campCtrl.selectedChampionship.name}} {{campCtrl.selectedChampionship.lugar}}</h3>
+                            <!-- EDIT MODE -->
+                        <h3 ng-if="campCtrl.selectedChampionship.id">
+                            {{campCtrl.selectedChampionship.name}} 
+                        </h3>
+                        <!-- ADD MODE -->
+                        <h3 ng-if="!campCtrl.selectedChampionship.id">
+                            Nuevo campeonato
+                        </h3>
                             <p>
                             <div class="form-inline">
                                 <div class="form-group">
-                                    <kbd>Campeonato:</kbd>
+                                    <kbd>Club:</kbd>
                                     <input type="text"
                                            class="form-control edit-inline"
                                            ng-model="campCtrl.selectedChampionship.name">
@@ -157,9 +179,13 @@
                         </p>
                         <p>
                             <a class="btn btn-primary"
-                               ng-click="campCtrl.updateChampionship()">Save</a>
+                                ng-if="campCtrl.selectedChampionship.id"
+                               ng-click="campCtrl.updateChampionship()">Actualizar</a>
+                            <a class="btn btn-primary"
+                               ng-if="!campCtrl.selectedChampionship.id"
+                               ng-click="campCtrl.addChampionship(campCtrl.selectChampionship)">Añadir</a>
                             <a class="btn btn-default"
-                               ng-click="campCtrl.cancelUpdate()">Cancel</a>
+                               ng-click="campCtrl.cancelUpdate()">Cancelar</a>
                         </p>
                         </div>
 

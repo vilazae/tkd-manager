@@ -93,8 +93,18 @@ if ( isSet( $data["action"] ) ) {
             echo "Falló la conexión a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
         }
 
+        print_r($data['parameters']['name']);
+        print_r($data['parameters']['last_name']);
+        print_r($data['parameters']['dni']);
+        print_r($data['parameters']['birth_date']);
+        print_r($data['parameters']['license_number']);
+        print_r($data['parameters']['license_expiration_date']);
+        print_r($data['parameters']['gender']);
+        print_r($data['parameters']['belt']);
+        print_r($data['parameters']['club_id']);
+
         //  BD query.
-        $sentencia = $mysqli->prepare("INSERT INTO tkd_competitors VALUES
+        /*$sentencia = $mysqli->prepare("INSERT INTO tkd_competitors VALUES
             name = ?, last_name = ?, dni = ?, birth_date = ?, license_number = ?,
             license_expiration_date = ?, gender = ?, cinturon = ?, club_id = ? ");
         $sentencia->bind_param("ssssssssi", $data['parameters']['name'], $data['parameters']['last_name'], $data['parameters']['dni'], $data['parameters']['birth_date'], $data['parameters']['license_number'], $data['parameters']['license_expiration_date'], $data['parameters']['gender'], $data['parameters']['belt'], $data['parameters']['club_id']);
@@ -107,7 +117,7 @@ if ( isSet( $data["action"] ) ) {
         else
         {
             print_r("INSERT Competitor OK");
-        } 
+        } */
     }
 
     //  Delete Competitor.
@@ -122,7 +132,7 @@ if ( isSet( $data["action"] ) ) {
 
         //  BD query.
         $response = $db->query("DELETE FROM tkd_competitors WHERE id=" . $data['id'] . ";");
-        if(!$result)
+        if(!$response)
         {
             echo("DELETE ABORT");                
         }
@@ -195,6 +205,30 @@ if ( isSet( $data["action"] ) ) {
         } 
     }
 
+    //  Delete Championship.
+    if ( $data["action"] == "delete_championship" ) {
+        $mysqli = $db->connect();
+
+        //print_r($data["parameters"]["id"]);
+
+        if ($mysqli->connect_errno) {
+            echo "Falló la conexión a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+        }
+
+        //  BD query.
+        $response = $db->query("DELETE FROM tkd_tournaments WHERE id=" . $data['id'] . ";");
+        if(!$response)
+        {
+            echo("DELETE ABORT");                
+        }
+        else{
+            echo("DELETE OK campeonato con id: ". $data['id'] );
+        }  
+
+        //  API response.
+        //print_r( json_encode( $rows ) );
+    }
+
     //CLUB
 
     //  Clubes List.
@@ -248,6 +282,30 @@ if ( isSet( $data["action"] ) ) {
         {
             print_r("UPDATE Club OK");
         } 
+    }
+
+    //  Delete Club.
+    if ( $data["action"] == "delete_club" ) {
+        $mysqli = $db->connect();
+
+        //print_r($data["parameters"]["id"]);
+
+        if ($mysqli->connect_errno) {
+            echo "Falló la conexión a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+        }
+
+        //  BD query.
+        $response = $db->query("DELETE FROM tkd_clubs WHERE id=" . $data['id'] . ";");
+        if(!$response)
+        {
+            echo("DELETE ABORT");                
+        }
+        else{
+            echo("DELETE OK club con id: ". $data['id'] );
+        }  
+
+        //  API response.
+        //print_r( json_encode( $rows ) );
     }
 
 }

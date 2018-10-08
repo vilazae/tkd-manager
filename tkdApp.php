@@ -35,6 +35,7 @@ else{
         <script src="./app/club/controllers/clubControllers.js"></script>
     	<script src="./app/championships/controllers/championshipControllers.js"></script>
     	<script src="./app/competitors/controllers/competitorControllers.js"></script>
+        <script src="./app/inscripciones/controllers/inscripcionControllers.js"></script>
 
 
 		<!-- jQuery -->

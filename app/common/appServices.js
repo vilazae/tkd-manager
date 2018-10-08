@@ -11,6 +11,7 @@ tkdApp.service('apiService', [ '$http', function( $http ) {
         return $http.post('backend/api.php', { action: 'list_users' } )
     }
 
+    //COMPETITORS
     function getCompetitorsList () {
         return $http.post('backend/api.php', { action: 'list_competitors' } )
     }
@@ -59,6 +60,7 @@ tkdApp.service('apiService', [ '$http', function( $http ) {
         return $http.post('backend/api.php', { action: 'delete_competitor', id: competitor_id } )
     }
 
+    //CHAMPIONSHIP
     function getChampionshipList () {
         return $http.post('backend/api.php', { action: 'list_championships' } )
     }
@@ -78,6 +80,11 @@ tkdApp.service('apiService', [ '$http', function( $http ) {
         );
     }
 
+    function deleteChampionship( championship_id ) {
+        return $http.post('backend/api.php', { action: 'delete_championship', id: championship_id } )
+    }
+
+    //CLUBS
     function getClubesList () {
         return $http.post('backend/api.php', { action: 'list_clubes' } )
     }
@@ -97,6 +104,10 @@ tkdApp.service('apiService', [ '$http', function( $http ) {
         );
     }
 
+    function deleteClub( club_id ) {
+        return $http.post('backend/api.php', { action: 'delete_club', id: club_id } )
+    }
+
     return {
         apiMethod           : apiMethod,
         sayHello            : sayHello,
@@ -107,8 +118,10 @@ tkdApp.service('apiService', [ '$http', function( $http ) {
         deleteCompetitor : deleteCompetitor,
         getChampionshipList : getChampionshipList,
         updateChampionship : updateChampionship,
+        deleteChampionship : deleteChampionship,
         getClubesList : getClubesList,
-        updateClub : updateClub
+        updateClub : updateClub,
+        deleteClub : deleteClub
     }
 
 } ] );
