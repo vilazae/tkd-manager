@@ -33,7 +33,10 @@ tkdApp.config([ '$stateProvider', '$urlRouterProvider', '$httpProvider', '$cooki
 		.state('inscribir', {
 			url: "/inscribir/:id",
 			templateUrl: "app/inscripciones/partials/inscribir.html",
-			controller: "inscripcionController as inscripCtrl"
+			controller: "inscripcionController as inscripCtrl",
+			params: {
+				championshipName:null
+			}
 		})	
 		.state('clubes', {
 			url: "/clubes",

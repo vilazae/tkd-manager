@@ -95,6 +95,18 @@ tkdApp.service('apiService', [ '$http', function( $http ) {
         return $http.post('backend/api.php', { action: 'delete_championship', id: championship_id } )
     }
 
+    function joinToChampionship( championship_id, arrayCompetitors ) {
+        return $http.post('backend/api.php',
+            {
+                action: 'join_to_championship',
+                parameters: {
+                    'championship_id'         : championship_id,
+                    'array_competitors_id'    : arrayCompetitors
+                }
+            }
+        );
+    }
+
     //CLUBS
     function getClubesList () {
         return $http.post('backend/api.php', { action: 'list_clubes' } )
@@ -131,6 +143,7 @@ tkdApp.service('apiService', [ '$http', function( $http ) {
         updateChampionship : updateChampionship,
         cerrarChampionship : cerrarChampionship,
         deleteChampionship : deleteChampionship,
+        joinToChampionship : joinToChampionship,
         getClubesList : getClubesList,
         updateClub : updateClub,
         deleteClub : deleteClub

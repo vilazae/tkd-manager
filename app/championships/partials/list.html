@@ -62,11 +62,11 @@
 
     <!-- Image Background Page Header -->
     <!-- Note: The background image is set within the business-casual.css file. -->
-    <header class="business-header">
+    <header class="business-header championship-background">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="tagline">Datos club</h1>
+                    <h1 class="tagline">Campeonatos</h1>
                 </div>
             </div>
         </div>
@@ -110,7 +110,7 @@
                                 
                                ng-click="campCtrl.cerrarChampionship(campeonato)">Cerrar campeonato</a></td>
                             <td><a class="btn btn-info"
-                               ng-click="" ui-sref="inscribir({id: campeonato.id})">Inscribir participantes</a></td>
+                               ng-click="" ui-sref="inscribir({id: campeonato.id, championshipName: campeonato.name })">Inscribir participantes</a></td>
                         </tr>
                                               
 

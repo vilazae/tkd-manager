@@ -19,7 +19,7 @@ $data = json_decode(file_get_contents('php://input'), true);
 if ( isSet( $data["action"] ) ) {
 
     /**
-     * COMPETITORS.
+     *  COMPETITORS.
      */
     //  Competitors List.
     if ( $data["action"] == "list_competitors" ) {
@@ -144,8 +144,9 @@ if ( isSet( $data["action"] ) ) {
         //print_r( json_encode( $rows ) );
     }
 
-    //CHAMPIONSHIP
-
+    /**
+     *  CHAMPIONSHIP
+     */
     //  Championship List.
     if ( $data["action"] == "list_championships" ) {
         $mysqli = $db->connect();
@@ -256,8 +257,34 @@ if ( isSet( $data["action"] ) ) {
         //print_r( json_encode( $rows ) );
     }
 
-    //CLUB
+    // Join to Championship
+    if ( $data["action"] == "join_to_championship" ) {
+        $mysqli = $db->connect();
 
+        if ($mysqli->connect_errno) {
+            echo "Falló la conexión a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+        }
+
+        //  Get the array of ids from the params.
+        $array_competitors_id = $data["parameters"]["array_competitors_id"];
+        //  Get the tournament_id from the params.
+        $championship_id      = $data["parameters"]["championship_id"];
+        foreach ( $array_competitors_id as $competitor_id ) {
+                   
+
+
+            $sentencia = $mysqli->prepare("INSERT INTO tkd_tournaments_competitors (id_competitor, id_tournament) 
+                VALUES ( ?, ? )" );
+            $sentencia->bind_param("ii", $competitor_id, $championship_id);
+            $sentencia->execute();
+            
+
+        }
+    }
+
+    /**
+     *  CLUB
+     */
     //  Clubes List.
     if ( $data["action"] == "list_clubes" ) {
         $mysqli = $db->connect();

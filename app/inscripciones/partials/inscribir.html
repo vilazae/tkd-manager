@@ -44,7 +44,7 @@
 
 <!-- Image Background Page Header -->
 <!-- Note: The background image is set within the business-casual.css file. -->
-<header class="business-header competitor-backgournd">
+<header class="business-header competitor-background">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -58,14 +58,8 @@
 <div class="container">
 
     <hr>
-    <div class="row">
-        <div class="col-sm-12 text-right">
-            <button class="btn btn-info margin-bottom-15"
-                    ng-click="inscripCtrl.addNewCompetitor()">
-                    <span class="glyphicon glyphicon-plus"></span>
-                    Inscribir nuevo competidor</button>
-        </div>
-    </div>
+    <h1>Añadir competidores a {{inscripCtrl.championshipName}}</h1>
+
     <div class="row">
         <div class="col-sm-12">
 
@@ -81,7 +75,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="competitor in inscripCtrl.inscripscionesList track by $index"
-                        ng-click="inscripCtrl.selectCompetitor(competitor, $index)"
+
                         ng-class="{'selected': competitor.selected}">
                         <td>{{ competitor.name }}</td>
                         <td>{{ competitor.last_name }}</td>
@@ -90,7 +84,7 @@
                         <td>{{ competitor.birth_date }}</td>
                         <td>{{ competitor.license_number }}</td>
                         <td>
-                            <input type="checkbox" name="">
+                            <input type="checkbox" ng-model="competitor.selected">
                         </td>
                     </tr>
 
@@ -99,6 +93,14 @@
 
         </div>
         
+    </div>
+        <div class="row">
+        <div class="col-sm-12 text-right">
+            <button class="btn btn-info margin-bottom-15"
+                    ng-click="inscripCtrl.addToChampionship()">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Inscribir competidores</button>
+        </div>
     </div>
     <!-- /.row -->
     <hr>
