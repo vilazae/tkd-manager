@@ -104,7 +104,7 @@
                             <td>{{ campeonato.date }}</td>
                             <td>{{ campeonato.lugar }}</td>
                             <td><a class="btn btn-danger"
-                               ng-click="deleteChampionship.deleteClub(club.id)">Eliminar</a>
+                               ng-click="campCtrl.deleteChampionship(campeonato.id)">Eliminar</a>
                             </td>
                             <td><a class="btn btn-info"
                                 
@@ -141,7 +141,7 @@
                             <p>
                             <div class="form-inline">
                                 <div class="form-group">
-                                    <kbd>Club:</kbd>
+                                    <kbd>Nombre de campeonato:</kbd>
                                     <input type="text"
                                            class="form-control edit-inline"
                                            ng-model="campCtrl.selectedChampionship.name">
